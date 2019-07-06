@@ -13772,8 +13772,8 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <sheets>
 <sheet>
 <plain>
-<text x="184.785" y="26.035" size="3.81" layer="94">Tiago Silva</text>
-<text x="177.8" y="19.685" size="2.54" layer="94">github.com/TiagoPaulaSilva</text>
+<text x="180.975" y="26.035" size="3.81" layer="94">Tiago Silva</text>
+<text x="166.37" y="19.685" size="2.54" layer="94">github.com/TiagoPaulaSilva/PlantsCare</text>
 <wire x1="185.42" y1="87.63" x2="185.42" y2="49.53" width="0.508" layer="97"/>
 <wire x1="185.42" y1="49.53" x2="208.28" y2="49.53" width="0.508" layer="97"/>
 <wire x1="208.28" y1="49.53" x2="208.28" y2="87.63" width="0.508" layer="97"/>
@@ -14252,6 +14252,27 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="102,1,137.16,71.12,+4.1V,3V,,,,"/>
+<approved hash="102,1,127,71.12,+4.1V,3V,,,,"/>
+<approved hash="102,1,22.86,166.37,+4.1V,3V,,,,"/>
+<approved hash="102,1,39.37,90.17,+4.1V,3V,,,,"/>
+<approved hash="102,1,52.07,90.17,+4.1V,3V,,,,"/>
+<approved hash="102,1,157.48,162.56,+4.1V,3V,,,,"/>
+<approved hash="102,1,144.78,54.61,+4.1V,3V,,,,"/>
+<approved hash="102,1,20.32,57.15,+4.1V,3V,,,,"/>
+<approved hash="104,1,33.02,133.35,U1,DVSS,GND,,,"/>
+<approved hash="104,1,33.02,130.81,U1,DVCC,3V,,,"/>
+<approved hash="202,1,33.02,118.11,U1,P1.6/TA0.2/TDI/TCLK/A6,,,,"/>
+<approved hash="202,1,33.02,115.57,U1,P1.5/TA0CLK/TMS/A5,,,,"/>
+<approved hash="202,1,33.02,113.03,U1,P1.4/MCLK/TCK/A4/VREF+,,,,"/>
+<approved hash="202,1,121.92,118.11,U1,P5.1/UCB0CLK/L33,,,,"/>
+<approved hash="104,1,88.9,58.42,PCB1,GND1,GND,,,"/>
+<approved hash="104,1,121.92,45.72,PCB1,GND2,GND,,,"/>
+<approved hash="104,1,121.92,48.26,PCB1,VBAT,3V,,,"/>
+<approved hash="104,1,121.92,50.8,PCB1,GND3,GND,,,"/>
+<approved hash="113,1,245.432,139.7,LED1,,,,,"/>
+</errors>
 </schematic>
 </drawing>
 <compatibility>
