@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -368,16 +368,6 @@ Source: &lt;a href="http://www.ti.com/lit/ds/symlink/msp430fr4133.pdf"&gt; Datas
 <package name="BLE-1010">
 <description>BLE-1010 MPCBA Qualcomm</description>
 <smd name="18" x="6.35" y="-4.48" dx="1" dy="2.41" layer="1" rot="R90"/>
-<wire x1="6.35" y1="-7.62" x2="-6.76" y2="-7.62" width="0.127" layer="21"/>
-<wire x1="6.35" y1="-7.62" x2="6.35" y2="14.07" width="0.127" layer="21"/>
-<wire x1="-6.76" y1="14.07" x2="6.35" y2="14.07" width="0.127" layer="21"/>
-<wire x1="-6.76" y1="14.07" x2="-6.76" y2="-7.62" width="0.127" layer="21"/>
-<polygon width="0.127" layer="39" pour="hatch">
-<vertex x="6.35" y="14.08"/>
-<vertex x="6.35" y="6.75"/>
-<vertex x="-6.76" y="6.75"/>
-<vertex x="-6.75" y="14.08"/>
-</polygon>
 <smd name="19" x="6.35" y="-3.08" dx="1" dy="2.41" layer="1" rot="R90"/>
 <smd name="20" x="6.35" y="-1.68" dx="1" dy="2.41" layer="1" rot="R90"/>
 <smd name="21" x="6.35" y="-0.28" dx="1" dy="2.41" layer="1" rot="R90"/>
@@ -13013,22 +13003,6 @@ Source: www.kingbright.com</description>
 &lt;p&gt;&lt;b&gt;Doublecheck before using!&lt;/b&gt;&lt;/p&gt;</description>
 <packages>
 <package name="DTSM-3">
-<wire x1="-3" y1="1.75" x2="3" y2="1.75" width="0.2032" layer="51"/>
-<wire x1="3" y1="1.75" x2="3" y2="-1.75" width="0.2032" layer="51"/>
-<wire x1="3" y1="-1.75" x2="-3" y2="-1.75" width="0.2032" layer="51"/>
-<wire x1="-3" y1="-1.75" x2="-3" y2="1.75" width="0.2032" layer="51"/>
-<wire x1="-1.5" y1="0.75" x2="1.5" y2="0.75" width="0.2032" layer="51"/>
-<wire x1="1.5" y1="0.75" x2="1.5" y2="-0.75" width="0.2032" layer="51"/>
-<wire x1="1.5" y1="-0.75" x2="-1.5" y2="-0.75" width="0.2032" layer="51"/>
-<wire x1="-1.5" y1="-0.75" x2="-1.5" y2="0.75" width="0.2032" layer="51"/>
-<wire x1="-3" y1="1.75" x2="-3" y2="1.25" width="0.2032" layer="21"/>
-<wire x1="-3" y1="1.75" x2="3" y2="1.75" width="0.2032" layer="21"/>
-<wire x1="3" y1="1.75" x2="3" y2="1.25" width="0.2032" layer="21"/>
-<wire x1="3" y1="-1.25" x2="3" y2="-1.75" width="0.2032" layer="21"/>
-<wire x1="3" y1="-1.75" x2="-3" y2="-1.75" width="0.2032" layer="21"/>
-<wire x1="-3" y1="-1.75" x2="-3" y2="-1.25" width="0.2032" layer="21"/>
-<wire x1="-1.25" y1="0.75" x2="1.25" y2="0.75" width="0.2032" layer="21"/>
-<wire x1="-1.25" y1="-0.75" x2="1.2" y2="-0.75" width="0.2032" layer="21"/>
 <smd name="1" x="-2.7" y="0" dx="2" dy="1.6" layer="1"/>
 <smd name="2" x="2.7" y="0" dx="2" dy="1.6" layer="1"/>
 <text x="-2.54" y="-3.81" size="1.27" layer="27">&gt;VALUE</text>
@@ -13714,6 +13688,66 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="1053">
+<description>&lt;Coin Cell Battery Holders BATTERY HOLDER FOR CR2450&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by SamacSys&lt;/author&gt;</description>
+<packages>
+<package name="1053">
+<description>&lt;b&gt;1053&lt;/b&gt;&lt;br&gt;
+</description>
+<pad name="1" x="0" y="-6.535" drill="1.3" diameter="2" rot="R90"/>
+<pad name="2" x="0" y="13.485" drill="1.3" diameter="2" rot="R90"/>
+<text x="-1.836" y="17.947" size="1.27" layer="25" rot="R180" align="center">&gt;NAME</text>
+<text x="-1.836" y="15.907" size="1.27" layer="27" rot="R180" align="center">&gt;VALUE</text>
+<wire x1="-5.4" y1="14.705" x2="5.4" y2="14.705" width="0.2" layer="51"/>
+<circle x="0" y="-1.27" radius="13.375" width="0.2" layer="51"/>
+<wire x1="-5.4" y1="14.705" x2="-5.4" y2="10.989" width="0.2" layer="51"/>
+<wire x1="5.4" y1="14.705" x2="5.4" y2="10.976" width="0.2" layer="51"/>
+<wire x1="-5.4" y1="10.989" x2="5.4" y2="10.989" width="0.2" layer="21" curve="312.4"/>
+<wire x1="-5.4" y1="10.989" x2="-5.4" y2="14.705" width="0.2" layer="21"/>
+<wire x1="-5.4" y1="14.705" x2="5.4" y2="14.705" width="0.2" layer="21"/>
+<wire x1="5.4" y1="14.705" x2="5.4" y2="10.976" width="0.2" layer="21"/>
+</package>
+</packages>
+<symbols>
+<symbol name="1053">
+<description>CR2450</description>
+<wire x1="-3.81" y1="1.27" x2="3.81" y2="1.27" width="0.254" layer="94"/>
+<wire x1="1.905" y1="0" x2="-1.905" y2="0" width="0.254" layer="94"/>
+<text x="3.81" y="3.175" size="1.778" layer="95" align="center-left">&gt;NAME</text>
+<text x="3.81" y="-1.27" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
+<pin name="3V" x="0" y="3.81" visible="off" length="short" direction="pwr" rot="R270"/>
+<pin name="GND" x="0" y="-5.08" visible="off" length="middle" direction="pwr" rot="R90"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="1053" prefix="U">
+<description>&lt;b&gt;Coin Cell Battery Holders BATTERY HOLDER FOR CR2450&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/1053.pdf"&gt; Datasheet &lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="1053" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="1053">
+<connects>
+<connect gate="G$1" pin="3V" pad="2"/>
+<connect gate="G$1" pin="GND" pad="1"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="DESCRIPTION" value="Coin Cell Battery Holders BATTERY HOLDER FOR CR2450" constant="no"/>
+<attribute name="HEIGHT" value="mm" constant="no"/>
+<attribute name="MANUFACTURER_NAME" value="Keystone Electronics" constant="no"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="1053" constant="no"/>
+<attribute name="MOUSER_PART_NUMBER" value="534-1053-BH" constant="no"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.com/Search/Refine.aspx?Keyword=534-1053-BH" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -13722,7 +13756,7 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <classes>
 <class number="0" name="default" width="0" drill="0">
 </class>
-<class number="2" name="gnd" width="0.3048" drill="0.5588">
+<class number="2" name="gnd" width="0.1524" drill="0.5588">
 <clearance class="2" value="0.254"/>
 </class>
 </classes>
@@ -13739,7 +13773,7 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
 <part name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
 <part name="LED1" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="CHIP-LED0805" package3d_urn="urn:adsk.eagle:package:15818/2"/>
-<part name="S1" library="switch-tact" deviceset="DTSM-3" device="" value=""/>
+<part name="S1" library="switch-tact" deviceset="DTSM-3" device="" value="DTSM-3"/>
 <part name="D1" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="DIODE-" device="SOD523" package3d_urn="urn:adsk.eagle:package:43410/4" value="1N4148"/>
 <part name="SUPPLY1" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+4.1V" device="" value="3V"/>
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -13768,6 +13802,11 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <part name="J1" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-?-04" device="05-7048" package3d_urn="urn:adsk.eagle:package:8078648/1" value="ICSP"/>
 <part name="SUPPLY2" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+4.1V" device="" value="3V"/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="BT1" library="1053" deviceset="1053" device="" value="CR2450"/>
+<part name="GND14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="SUPPLY9" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+4.1V" device="" value="3V"/>
+<part name="R6" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
+<part name="R7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
 </parts>
 <sheets>
 <sheet>
@@ -13838,8 +13877,8 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <attribute name="NAME" x="203.2" y="108.4326" size="1.778" layer="95"/>
 <attribute name="VALUE" x="203.2" y="103.0986" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY1" gate="P" x="22.86" y="168.91" smashed="yes">
-<attribute name="VALUE" x="20.955" y="172.085" size="1.778" layer="96"/>
+<instance part="SUPPLY1" gate="P" x="25.4" y="168.91" smashed="yes">
+<attribute name="VALUE" x="23.495" y="172.085" size="1.778" layer="96"/>
 </instance>
 <instance part="GND13" gate="1" x="245.11" y="129.54" smashed="yes">
 <attribute name="VALUE" x="242.57" y="127" size="1.778" layer="96"/>
@@ -13853,25 +13892,25 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <instance part="GND2" gate="1" x="27.94" y="100.33" smashed="yes">
 <attribute name="VALUE" x="25.4" y="97.79" size="1.778" layer="96"/>
 </instance>
-<instance part="C1" gate="G$1" x="39.37" y="85.09" smashed="yes">
-<attribute name="NAME" x="42.418" y="84.963" size="1.778" layer="95"/>
-<attribute name="VALUE" x="42.418" y="82.169" size="1.778" layer="96"/>
+<instance part="C1" gate="G$1" x="48.26" y="87.63" smashed="yes">
+<attribute name="NAME" x="51.308" y="87.503" size="1.778" layer="95"/>
+<attribute name="VALUE" x="51.308" y="84.709" size="1.778" layer="96"/>
 </instance>
-<instance part="C2" gate="G$1" x="52.07" y="85.09" smashed="yes">
-<attribute name="NAME" x="55.118" y="84.963" size="1.778" layer="95"/>
-<attribute name="VALUE" x="55.118" y="82.169" size="1.778" layer="96"/>
+<instance part="C2" gate="G$1" x="60.96" y="87.63" smashed="yes">
+<attribute name="NAME" x="64.008" y="87.503" size="1.778" layer="95"/>
+<attribute name="VALUE" x="64.008" y="84.709" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY3" gate="P" x="39.37" y="92.71" smashed="yes">
-<attribute name="VALUE" x="38.735" y="95.885" size="1.778" layer="96"/>
+<instance part="SUPPLY3" gate="P" x="48.26" y="95.25" smashed="yes">
+<attribute name="VALUE" x="47.625" y="98.425" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY4" gate="P" x="52.07" y="92.71" smashed="yes">
-<attribute name="VALUE" x="51.435" y="95.885" size="1.778" layer="96"/>
+<instance part="SUPPLY4" gate="P" x="60.96" y="95.25" smashed="yes">
+<attribute name="VALUE" x="60.325" y="98.425" size="1.778" layer="96"/>
 </instance>
-<instance part="GND3" gate="1" x="39.37" y="74.93" smashed="yes">
-<attribute name="VALUE" x="36.83" y="72.39" size="1.778" layer="96"/>
+<instance part="GND3" gate="1" x="48.26" y="77.47" smashed="yes">
+<attribute name="VALUE" x="45.72" y="74.93" size="1.778" layer="96"/>
 </instance>
-<instance part="GND4" gate="1" x="52.07" y="74.93" smashed="yes">
-<attribute name="VALUE" x="49.53" y="72.39" size="1.778" layer="96"/>
+<instance part="GND4" gate="1" x="60.96" y="77.47" smashed="yes">
+<attribute name="VALUE" x="58.42" y="74.93" size="1.778" layer="96"/>
 </instance>
 <instance part="C6" gate="G$1" x="201.93" y="139.7" smashed="yes">
 <attribute name="NAME" x="204.978" y="139.573" size="1.778" layer="95"/>
@@ -13918,37 +13957,55 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <attribute name="NAME" x="192.405" y="150.495" size="1.778" layer="95"/>
 <attribute name="VALUE" x="187.96" y="143.51" size="1.778" layer="96"/>
 </instance>
-<instance part="J1" gate="-1" x="13.97" y="53.34" smashed="yes" rot="MR0">
-<attribute name="NAME" x="11.43" y="52.578" size="1.524" layer="95" rot="MR0"/>
-<attribute name="VALUE" x="5.588" y="58.293" size="1.778" layer="96" rot="MR180"/>
+<instance part="J1" gate="-1" x="15.24" y="34.29" smashed="yes" rot="MR0">
+<attribute name="NAME" x="12.7" y="33.528" size="1.524" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="11.938" y="39.243" size="1.778" layer="96" rot="MR180"/>
 </instance>
-<instance part="J1" gate="-2" x="13.97" y="48.26" smashed="yes" rot="MR0">
-<attribute name="NAME" x="11.43" y="47.498" size="1.524" layer="95" rot="MR0"/>
+<instance part="J1" gate="-2" x="15.24" y="29.21" smashed="yes" rot="MR0">
+<attribute name="NAME" x="12.7" y="28.448" size="1.524" layer="95" rot="MR0"/>
 </instance>
-<instance part="J1" gate="-3" x="13.97" y="43.18" smashed="yes" rot="MR0">
-<attribute name="NAME" x="11.43" y="42.418" size="1.524" layer="95" rot="MR0"/>
+<instance part="J1" gate="-3" x="15.24" y="24.13" smashed="yes" rot="MR0">
+<attribute name="NAME" x="12.7" y="23.368" size="1.524" layer="95" rot="MR0"/>
 </instance>
-<instance part="J1" gate="-4" x="13.97" y="38.1" smashed="yes" rot="MR0">
-<attribute name="NAME" x="11.43" y="37.338" size="1.524" layer="95" rot="MR0"/>
+<instance part="J1" gate="-4" x="15.24" y="19.05" smashed="yes" rot="MR0">
+<attribute name="NAME" x="12.7" y="18.288" size="1.524" layer="95" rot="MR0"/>
 </instance>
-<instance part="SUPPLY2" gate="P" x="20.32" y="59.69" smashed="yes" rot="MR0">
-<attribute name="VALUE" x="22.225" y="62.865" size="1.778" layer="96" rot="MR0"/>
+<instance part="SUPPLY2" gate="P" x="21.59" y="41.91" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="23.495" y="45.085" size="1.778" layer="96" rot="MR0"/>
 </instance>
-<instance part="GND1" gate="1" x="20.32" y="31.75" smashed="yes" rot="MR0">
-<attribute name="VALUE" x="22.86" y="29.21" size="1.778" layer="96" rot="MR0"/>
+<instance part="GND1" gate="1" x="21.59" y="11.43" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="24.13" y="8.89" size="1.778" layer="96" rot="MR0"/>
+</instance>
+<instance part="BT1" gate="G$1" x="21.59" y="68.58" smashed="yes">
+<attribute name="NAME" x="26.67" y="71.755" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="26.67" y="69.85" size="1.778" layer="96" align="center-left"/>
+</instance>
+<instance part="GND14" gate="1" x="21.59" y="57.15" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="24.13" y="54.61" size="1.778" layer="96" rot="MR0"/>
+</instance>
+<instance part="SUPPLY9" gate="P" x="21.59" y="78.74" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="23.495" y="81.915" size="1.778" layer="96" rot="MR0"/>
+</instance>
+<instance part="R6" gate="G$1" x="184.15" y="91.44" smashed="yes" rot="R180">
+<attribute name="NAME" x="181.61" y="92.9386" size="1.778" layer="95"/>
+<attribute name="VALUE" x="181.61" y="88.138" size="1.778" layer="96"/>
+</instance>
+<instance part="R7" gate="G$1" x="209.55" y="91.44" smashed="yes" rot="R180">
+<attribute name="NAME" x="207.01" y="92.9386" size="1.778" layer="95"/>
+<attribute name="VALUE" x="207.01" y="88.138" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
 </busses>
 <nets>
-<net name="SENSOR_OUTPUT" class="0">
+<net name="ELECTRODE_CAP2" class="0">
 <segment>
 <wire x1="196.85" y1="106.68" x2="196.85" y2="55.88" width="0.254" layer="91"/>
+<pinref part="D1" gate="G$1" pin="A"/>
 <wire x1="204.47" y1="106.68" x2="196.85" y2="106.68" width="0.1524" layer="91"/>
 <pinref part="R3" gate="G$1" pin="1"/>
 <wire x1="190.5" y1="106.68" x2="196.85" y2="106.68" width="0.1524" layer="91"/>
 <junction x="196.85" y="106.68"/>
-<pinref part="D1" gate="G$1" pin="A"/>
 </segment>
 </net>
 <net name="HF_SQUAREWAVE" class="0">
@@ -13958,9 +14015,9 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <label x="175.26" y="106.68" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="P2.0/L24"/>
-<wire x1="121.92" y1="140.97" x2="125.73" y2="140.97" width="0.1524" layer="91"/>
-<label x="125.73" y="140.97" size="1.27" layer="95" ratio="5" xref="yes"/>
+<label x="22.86" y="153.67" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
+<pinref part="U1" gate="G$1" pin="P7.0/L0"/>
+<wire x1="33.02" y1="153.67" x2="22.86" y2="153.67" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="GND" class="2">
@@ -13986,22 +14043,22 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <pinref part="GND13" gate="1" pin="GND"/>
 </segment>
 <segment>
+<wire x1="179.07" y1="91.44" x2="176.53" y2="91.44" width="0.254" layer="91"/>
+<wire x1="176.53" y1="91.44" x2="176.53" y2="88.9" width="0.254" layer="91"/>
+<pinref part="GND8" gate="1" pin="GND"/>
+<pinref part="R6" gate="G$1" pin="2"/>
+</segment>
+<segment>
 <pinref part="R4" gate="G$1" pin="2"/>
 <pinref part="C7" gate="G$1" pin="2"/>
 <wire x1="228.6" y1="95.25" x2="228.6" y2="91.44" width="0.1524" layer="91"/>
 <wire x1="228.6" y1="91.44" x2="218.44" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="GND11" gate="1" pin="GND"/>
 <wire x1="218.44" y1="88.9" x2="218.44" y2="91.44" width="0.1524" layer="91"/>
 <junction x="218.44" y="91.44"/>
 <wire x1="218.44" y1="91.44" x2="218.44" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="193.04" y1="91.44" x2="193.04" y2="57.15" width="0.254" layer="91"/>
-<wire x1="193.04" y1="57.15" x2="196.85" y2="53.34" width="0.254" layer="91" curve="90"/>
-<wire x1="200.66" y1="91.44" x2="200.66" y2="57.15" width="0.254" layer="91"/>
-<wire x1="196.85" y1="53.34" x2="200.66" y2="57.15" width="0.254" layer="91" curve="90"/>
-<wire x1="200.66" y1="91.44" x2="218.44" y2="91.44" width="0.254" layer="91"/>
-<wire x1="193.04" y1="91.44" x2="176.53" y2="91.44" width="0.254" layer="91"/>
-<wire x1="176.53" y1="91.44" x2="176.53" y2="88.9" width="0.254" layer="91"/>
-<pinref part="GND8" gate="1" pin="GND"/>
-<pinref part="GND11" gate="1" pin="GND"/>
+<wire x1="214.63" y1="91.44" x2="218.44" y2="91.44" width="0.254" layer="91"/>
+<pinref part="R7" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="DVSS"/>
@@ -14012,12 +14069,12 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <segment>
 <pinref part="C1" gate="G$1" pin="2"/>
 <pinref part="GND3" gate="1" pin="GND"/>
-<wire x1="39.37" y1="77.47" x2="39.37" y2="80.01" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="80.01" x2="48.26" y2="82.55" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C2" gate="G$1" pin="2"/>
 <pinref part="GND4" gate="1" pin="GND"/>
-<wire x1="52.07" y1="77.47" x2="52.07" y2="80.01" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="80.01" x2="60.96" y2="82.55" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C5" gate="G$1" pin="2"/>
@@ -14046,9 +14103,14 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 </segment>
 <segment>
 <pinref part="J1" gate="-4" pin="S"/>
-<wire x1="16.51" y1="38.1" x2="20.32" y2="38.1" width="0.1524" layer="91"/>
+<wire x1="17.78" y1="19.05" x2="21.59" y2="19.05" width="0.1524" layer="91"/>
 <pinref part="GND1" gate="1" pin="GND"/>
-<wire x1="20.32" y1="34.29" x2="20.32" y2="38.1" width="0.1524" layer="91"/>
+<wire x1="21.59" y1="13.97" x2="21.59" y2="19.05" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="BT1" gate="G$1" pin="GND"/>
+<pinref part="GND14" gate="1" pin="GND"/>
+<wire x1="21.59" y1="59.69" x2="21.59" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="BLE_RX" class="0">
@@ -14103,18 +14165,18 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <segment>
 <pinref part="U1" gate="G$1" pin="DVCC"/>
 <pinref part="SUPPLY1" gate="P" pin="+4.1V"/>
-<wire x1="33.02" y1="130.81" x2="22.86" y2="130.81" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="130.81" x2="22.86" y2="166.37" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="130.81" x2="25.4" y2="130.81" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="130.81" x2="25.4" y2="166.37" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C1" gate="G$1" pin="1"/>
 <pinref part="SUPPLY3" gate="P" pin="+4.1V"/>
-<wire x1="39.37" y1="90.17" x2="39.37" y2="87.63" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="92.71" x2="48.26" y2="90.17" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C2" gate="G$1" pin="1"/>
 <pinref part="SUPPLY4" gate="P" pin="+4.1V"/>
-<wire x1="52.07" y1="90.17" x2="52.07" y2="87.63" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="92.71" x2="60.96" y2="90.17" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R2" gate="G$1" pin="1"/>
@@ -14128,9 +14190,14 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 </segment>
 <segment>
 <pinref part="J1" gate="-1" pin="S"/>
-<wire x1="16.51" y1="53.34" x2="20.32" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="17.78" y1="34.29" x2="21.59" y2="34.29" width="0.1524" layer="91"/>
 <pinref part="SUPPLY2" gate="P" pin="+4.1V"/>
-<wire x1="20.32" y1="53.34" x2="20.32" y2="57.15" width="0.1524" layer="91"/>
+<wire x1="21.59" y1="34.29" x2="21.59" y2="39.37" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="BT1" gate="G$1" pin="3V"/>
+<pinref part="SUPPLY9" gate="P" pin="+4.1V"/>
+<wire x1="21.59" y1="76.2" x2="21.59" y2="72.39" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="SENSOR_VOUT" class="0">
@@ -14148,9 +14215,9 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <pinref part="D1" gate="G$1" pin="C"/>
 </segment>
 <segment>
-<label x="22.86" y="120.65" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
-<pinref part="U1" gate="G$1" pin="P1.7/TA0.1/TDO/A7"/>
-<wire x1="33.02" y1="120.65" x2="22.86" y2="120.65" width="0.1524" layer="91"/>
+<label x="21.59" y="107.95" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
+<wire x1="21.59" y1="107.95" x2="33.02" y2="107.95" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="P1.2/UCA0CLK/A2"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -14167,9 +14234,9 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <label x="245.11" y="161.29" size="1.27" layer="95" ratio="5" rot="R90" xref="yes"/>
 </segment>
 <segment>
+<label x="21.59" y="110.49" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
+<wire x1="21.59" y1="110.49" x2="33.02" y2="110.49" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="P1.3/UCA0STE/A3"/>
-<wire x1="33.02" y1="110.49" x2="22.86" y2="110.49" width="0.1524" layer="91"/>
-<label x="22.86" y="110.49" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="BUTTON_PROG" class="0">
@@ -14179,9 +14246,9 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <wire x1="228.6" y1="152.4" x2="228.6" y2="161.29" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="P1.2/UCA0CLK/A2"/>
-<wire x1="33.02" y1="107.95" x2="22.86" y2="107.95" width="0.1524" layer="91"/>
-<label x="22.86" y="107.95" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
+<label x="22.86" y="120.65" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
+<pinref part="U1" gate="G$1" pin="P1.7/TA0.1/TDO/A7"/>
+<wire x1="33.02" y1="120.65" x2="22.86" y2="120.65" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="XIN" class="0">
@@ -14233,8 +14300,8 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 </segment>
 <segment>
 <pinref part="J1" gate="-2" pin="S"/>
-<wire x1="16.51" y1="48.26" x2="21.59" y2="48.26" width="0.1524" layer="91"/>
-<label x="21.59" y="48.26" size="1.27" layer="95" ratio="5" rot="MR180" xref="yes"/>
+<wire x1="17.78" y1="29.21" x2="22.86" y2="29.21" width="0.1524" layer="91"/>
+<label x="22.86" y="29.21" size="1.27" layer="95" ratio="5" rot="MR180" xref="yes"/>
 </segment>
 </net>
 <net name="SBWTCK" class="0">
@@ -14245,8 +14312,20 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 </segment>
 <segment>
 <pinref part="J1" gate="-3" pin="S"/>
-<wire x1="16.51" y1="43.18" x2="21.59" y2="43.18" width="0.1524" layer="91"/>
-<label x="21.59" y="43.18" size="1.27" layer="95" ratio="5" rot="MR180" xref="yes"/>
+<wire x1="17.78" y1="24.13" x2="22.86" y2="24.13" width="0.1524" layer="91"/>
+<label x="22.86" y="24.13" size="1.27" layer="95" ratio="5" rot="MR180" xref="yes"/>
+</segment>
+</net>
+<net name="ELECTRODE_CAP1" class="2">
+<segment>
+<wire x1="193.04" y1="91.44" x2="193.04" y2="57.15" width="0.254" layer="91"/>
+<wire x1="193.04" y1="57.15" x2="196.85" y2="53.34" width="0.254" layer="91" curve="90"/>
+<wire x1="200.66" y1="91.44" x2="200.66" y2="57.15" width="0.254" layer="91"/>
+<wire x1="196.85" y1="53.34" x2="200.66" y2="57.15" width="0.254" layer="91" curve="90"/>
+<wire x1="193.04" y1="91.44" x2="189.23" y2="91.44" width="0.254" layer="91"/>
+<pinref part="R6" gate="G$1" pin="1"/>
+<wire x1="200.66" y1="91.44" x2="204.47" y2="91.44" width="0.254" layer="91"/>
+<pinref part="R7" gate="G$1" pin="2"/>
 </segment>
 </net>
 </nets>
@@ -14256,11 +14335,8 @@ wire to board 2.54 mm (.1 inch) pitch header</description>
 <approved hash="102,1,137.16,71.12,+4.1V,3V,,,,"/>
 <approved hash="102,1,127,71.12,+4.1V,3V,,,,"/>
 <approved hash="102,1,22.86,166.37,+4.1V,3V,,,,"/>
-<approved hash="102,1,39.37,90.17,+4.1V,3V,,,,"/>
-<approved hash="102,1,52.07,90.17,+4.1V,3V,,,,"/>
 <approved hash="102,1,157.48,162.56,+4.1V,3V,,,,"/>
 <approved hash="102,1,144.78,54.61,+4.1V,3V,,,,"/>
-<approved hash="102,1,20.32,57.15,+4.1V,3V,,,,"/>
 <approved hash="104,1,33.02,133.35,U1,DVSS,GND,,,"/>
 <approved hash="104,1,33.02,130.81,U1,DVCC,3V,,,"/>
 <approved hash="202,1,33.02,118.11,U1,P1.6/TA0.2/TDI/TCLK/A6,,,,"/>
