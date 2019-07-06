@@ -1,4 +1,4 @@
-Partlist exported from C:/Users/Tiago Silva/Documents/EAGLE/projects/Soil Moisture Meter (IoT Device)/Soil Moisture Meter (IoT Device).sch at 06/07/2019 19:28
+Partlist exported from C:/Users/Tiago Silva/Documents/EAGLE/projects/Soil Moisture Meter (IoT Device)/Hardware/Soil Moisture Meter (IoT Device).sch at 06/07/2019 19:51
 
 Qty Value        Device          Package           Parts              Description                                         DESCRIPTION                                         HEIGHT MANUFACTURER_NAME    MANUFACTURER_PART_NUMBER MF    MOUSER_PART_NUMBER MOUSER_PRICE-STOCK                                            MPN OC_FARNELL OC_NEWARK SPICEPREFIX
 1                LEDCHIP-LED0805 CHIP-LED0805      LED1               LED                                                                                                                                                                                                                                                                                     
