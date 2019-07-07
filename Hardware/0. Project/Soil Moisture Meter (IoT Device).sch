@@ -486,62 +486,6 @@ Source: &lt;a href="http://www.ti.com/lit/ds/symlink/msp430fr4133.pdf"&gt; Datas
 </deviceset>
 </devicesets>
 </library>
-<library name="frames" urn="urn:adsk.eagle:library:229">
-<description>&lt;b&gt;Frames for Sheet and Layout&lt;/b&gt;</description>
-<packages>
-</packages>
-<symbols>
-<symbol name="DINA4_L" urn="urn:adsk.eagle:symbol:13867/1" library_version="1">
-<frame x1="0" y1="0" x2="264.16" y2="180.34" columns="4" rows="4" layer="94" border-left="no" border-top="no" border-right="no" border-bottom="no"/>
-</symbol>
-<symbol name="DOCFIELD" urn="urn:adsk.eagle:symbol:13864/1" library_version="1">
-<wire x1="0" y1="0" x2="71.12" y2="0" width="0.1016" layer="94"/>
-<wire x1="101.6" y1="15.24" x2="87.63" y2="15.24" width="0.1016" layer="94"/>
-<wire x1="0" y1="0" x2="0" y2="5.08" width="0.1016" layer="94"/>
-<wire x1="0" y1="5.08" x2="71.12" y2="5.08" width="0.1016" layer="94"/>
-<wire x1="0" y1="5.08" x2="0" y2="15.24" width="0.1016" layer="94"/>
-<wire x1="101.6" y1="15.24" x2="101.6" y2="5.08" width="0.1016" layer="94"/>
-<wire x1="71.12" y1="5.08" x2="71.12" y2="0" width="0.1016" layer="94"/>
-<wire x1="71.12" y1="5.08" x2="87.63" y2="5.08" width="0.1016" layer="94"/>
-<wire x1="71.12" y1="0" x2="101.6" y2="0" width="0.1016" layer="94"/>
-<wire x1="87.63" y1="15.24" x2="87.63" y2="5.08" width="0.1016" layer="94"/>
-<wire x1="87.63" y1="15.24" x2="0" y2="15.24" width="0.1016" layer="94"/>
-<wire x1="87.63" y1="5.08" x2="101.6" y2="5.08" width="0.1016" layer="94"/>
-<wire x1="101.6" y1="5.08" x2="101.6" y2="0" width="0.1016" layer="94"/>
-<wire x1="0" y1="15.24" x2="0" y2="22.86" width="0.1016" layer="94"/>
-<wire x1="101.6" y1="35.56" x2="0" y2="35.56" width="0.1016" layer="94"/>
-<wire x1="101.6" y1="35.56" x2="101.6" y2="22.86" width="0.1016" layer="94"/>
-<wire x1="0" y1="22.86" x2="101.6" y2="22.86" width="0.1016" layer="94"/>
-<wire x1="0" y1="22.86" x2="0" y2="35.56" width="0.1016" layer="94"/>
-<wire x1="101.6" y1="22.86" x2="101.6" y2="15.24" width="0.1016" layer="94"/>
-<text x="1.27" y="1.27" size="2.54" layer="94">Date:</text>
-<text x="12.7" y="1.27" size="2.54" layer="94">&gt;LAST_DATE_TIME</text>
-<text x="72.39" y="1.27" size="2.54" layer="94">Sheet:</text>
-<text x="86.36" y="1.27" size="2.54" layer="94">&gt;SHEET</text>
-<text x="88.9" y="11.43" size="2.54" layer="94">REV:</text>
-<text x="1.27" y="19.05" size="2.54" layer="94">TITLE:</text>
-<text x="1.27" y="11.43" size="2.54" layer="94">Document Number:</text>
-<text x="17.78" y="19.05" size="2.54" layer="94">&gt;DRAWING_NAME</text>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="DINA4_L" urn="urn:adsk.eagle:component:13919/1" prefix="FRAME" uservalue="yes" library_version="1">
-<description>&lt;b&gt;FRAME&lt;/b&gt;&lt;p&gt;
-DIN A4, landscape with extra doc field</description>
-<gates>
-<gate name="G$1" symbol="DINA4_L" x="0" y="0"/>
-<gate name="G$2" symbol="DOCFIELD" x="162.56" y="0" addlevel="must"/>
-</gates>
-<devices>
-<device name="">
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="rcl" urn="urn:adsk.eagle:library:334">
 <description>&lt;b&gt;Resistors, Capacitors, Inductors&lt;/b&gt;&lt;p&gt;
 Based on the previous libraries:
@@ -13604,6 +13548,198 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/1053.pdf"&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="frames">
+<description>&lt;b&gt;Frames for Sheet and Layout&lt;/b&gt;</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="DINA4_L">
+<frame x1="0" y1="0" x2="264.16" y2="180.34" columns="4" rows="4" layer="94" border-left="no" border-top="no" border-right="no" border-bottom="no"/>
+</symbol>
+<symbol name="DOCFIELD">
+<wire x1="0" y1="0" x2="80.01" y2="0" width="0.1016" layer="94"/>
+<wire x1="80.01" y1="0" x2="101.6" y2="0" width="0.1016" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="5.08" width="0.1016" layer="94"/>
+<wire x1="0" y1="5.08" x2="80.01" y2="5.08" width="0.1016" layer="94"/>
+<wire x1="80.01" y1="5.08" x2="101.6" y2="5.08" width="0.1016" layer="94"/>
+<wire x1="101.6" y1="5.08" x2="101.6" y2="0" width="0.1016" layer="94"/>
+<wire x1="0" y1="5.08" x2="0" y2="10.16" width="0.1016" layer="94"/>
+<wire x1="101.6" y1="38.1" x2="68.58" y2="38.1" width="0.1016" layer="94"/>
+<wire x1="68.58" y1="38.1" x2="0" y2="38.1" width="0.1016" layer="94"/>
+<wire x1="101.6" y1="38.1" x2="101.6" y2="15.24" width="0.1016" layer="94"/>
+<wire x1="101.6" y1="15.24" x2="101.6" y2="10.16" width="0.1016" layer="94"/>
+<wire x1="0" y1="10.16" x2="80.01" y2="10.16" width="0.1016" layer="94"/>
+<wire x1="80.01" y1="10.16" x2="101.6" y2="10.16" width="0.1016" layer="94"/>
+<wire x1="0" y1="10.16" x2="0" y2="15.24" width="0.1016" layer="94"/>
+<wire x1="0" y1="15.24" x2="0" y2="38.1" width="0.1016" layer="94"/>
+<wire x1="101.6" y1="10.16" x2="101.6" y2="5.08" width="0.1016" layer="94"/>
+<text x="1.27" y="1.27" size="2.54" layer="94">Date:</text>
+<text x="11.43" y="1.27" size="2.54" layer="94">&gt;LAST_DATE_TIME</text>
+<text x="81.28" y="6.35" size="2.54" layer="94">Sheet:</text>
+<text x="92.71" y="6.35" size="2.54" layer="94">&gt;SHEET</text>
+<text x="81.534" y="1.524" size="2.54" layer="94">Rev.:</text>
+<text x="1.27" y="11.557" size="2.54" layer="94">Project Name:</text>
+<text x="1.27" y="6.477" size="2.54" layer="94">Page Title:</text>
+<text x="25.4" y="11.557" size="2.54" layer="94">&gt;DRAWING_NAME</text>
+<wire x1="80.01" y1="10.16" x2="80.01" y2="5.08" width="0.1016" layer="94"/>
+<text x="1.27" y="33.655" size="2.54" layer="94">Design by:</text>
+<wire x1="80.01" y1="5.08" x2="80.01" y2="0" width="0.1016" layer="94"/>
+<wire x1="0" y1="15.24" x2="68.58" y2="15.24" width="0.1016" layer="94"/>
+<wire x1="68.58" y1="15.24" x2="101.6" y2="15.24" width="0.1016" layer="94"/>
+<wire x1="71.4375" y1="18.8912" x2="71.4375" y2="17.6212" width="0.508" layer="94"/>
+<wire x1="72.7075" y1="18.8912" x2="72.7075" y2="17.6212" width="0.508" layer="94"/>
+<wire x1="71.4375" y1="18.8912" x2="72.7075" y2="18.8912" width="0.508" layer="94" curve="-180"/>
+<wire x1="72.7075" y1="17.6212" x2="71.4375" y2="17.6212" width="0.508" layer="94" curve="-180"/>
+<wire x1="73.66" y1="19.05" x2="73.66" y2="17.78" width="0.508" layer="94"/>
+<wire x1="74.93" y1="19.05" x2="74.93" y2="17.78" width="0.508" layer="94"/>
+<wire x1="73.66" y1="19.05" x2="74.93" y2="19.05" width="0.508" layer="94" curve="-180"/>
+<wire x1="74.93" y1="17.78" x2="73.66" y2="17.78" width="0.508" layer="94" curve="-180"/>
+<wire x1="73.66" y1="17.78" x2="73.66" y2="16.51" width="0.508" layer="94"/>
+<wire x1="75.8824" y1="19.05" x2="75.8824" y2="18.415" width="0.508" layer="94"/>
+<wire x1="75.8824" y1="19.05" x2="77.1524" y2="19.05" width="0.508" layer="94" curve="-180"/>
+<wire x1="77.1524" y1="19.05" x2="75.8824" y2="18.415" width="0.508" layer="94"/>
+<wire x1="75.8824" y1="18.415" x2="75.8824" y2="18.0975" width="0.508" layer="94"/>
+<wire x1="75.8824" y1="18.0975" x2="76.5174" y2="17.4625" width="0.508" layer="94" curve="90"/>
+<wire x1="77.1524" y1="18.0975" x2="76.5174" y2="17.4625" width="0.508" layer="94" curve="-90"/>
+<wire x1="77.1524" y1="18.0975" x2="77.1524" y2="18.415" width="0.508" layer="94"/>
+<wire x1="78.1049" y1="17.4625" x2="78.1049" y2="19.05" width="0.508" layer="94"/>
+<wire x1="78.1049" y1="19.05" x2="78.7399" y2="19.685" width="0.508" layer="94" curve="-90"/>
+<wire x1="78.7399" y1="19.685" x2="79.3749" y2="19.05" width="0.508" layer="94" curve="-90"/>
+<wire x1="79.3749" y1="19.05" x2="79.3749" y2="17.4625" width="0.508" layer="94"/>
+<wire x1="81.7561" y1="17.4624" x2="81.7561" y2="19.0499" width="0.4064" layer="94"/>
+<wire x1="81.7561" y1="19.0499" x2="82.3911" y2="19.6849" width="0.4064" layer="94" curve="-90"/>
+<wire x1="82.3911" y1="19.6849" x2="83.0261" y2="19.0499" width="0.4064" layer="94" curve="-90"/>
+<wire x1="83.0261" y1="19.0499" x2="83.0261" y2="17.4624" width="0.4064" layer="94"/>
+<wire x1="81.7561" y1="19.0499" x2="81.7561" y2="20.6374" width="0.4064" layer="94"/>
+<wire x1="85.2486" y1="18.7324" x2="85.2486" y2="19.0499" width="0.4064" layer="94"/>
+<wire x1="85.2486" y1="19.0499" x2="84.6136" y2="19.6849" width="0.4064" layer="94" curve="90"/>
+<wire x1="84.6136" y1="19.6849" x2="83.9786" y2="19.0499" width="0.4064" layer="94" curve="90"/>
+<wire x1="85.2486" y1="18.7324" x2="84.6136" y2="18.4149" width="0.4064" layer="94"/>
+<wire x1="84.6136" y1="18.4149" x2="83.9786" y2="17.7799" width="0.4064" layer="94" curve="36.869898"/>
+<wire x1="84.6136" y1="17.4624" x2="84.2961" y2="17.4624" width="0.4064" layer="94"/>
+<wire x1="84.2961" y1="17.4624" x2="83.9786" y2="17.7799" width="0.4064" layer="94" curve="-90"/>
+<wire x1="85.2486" y1="17.4624" x2="85.2486" y2="18.7324" width="0.4064" layer="94"/>
+<wire x1="86.2011" y1="17.4624" x2="86.2011" y2="19.0499" width="0.4064" layer="94"/>
+<wire x1="86.2011" y1="19.0499" x2="86.8361" y2="19.6849" width="0.4064" layer="94" curve="-90"/>
+<wire x1="86.8361" y1="19.6849" x2="87.4711" y2="19.0499" width="0.4064" layer="94" curve="-90"/>
+<wire x1="89.6936" y1="18.0974" x2="89.6936" y2="19.3674" width="0.4064" layer="94"/>
+<wire x1="88.4236" y1="18.0974" x2="88.4236" y2="19.3674" width="0.4064" layer="94"/>
+<wire x1="89.6936" y1="18.0974" x2="88.4236" y2="18.0974" width="0.4064" layer="94" curve="-180"/>
+<wire x1="88.4236" y1="19.3674" x2="89.6936" y2="19.3674" width="0.4064" layer="94" curve="-180"/>
+<wire x1="89.6936" y1="19.3674" x2="89.6936" y2="20.6374" width="0.4064" layer="94"/>
+<wire x1="90.6461" y1="19.7485" x2="90.6461" y2="17.9387" width="0.4064" layer="94"/>
+<wire x1="90.6461" y1="17.9387" x2="91.4399" y2="17.9387" width="0.4064" layer="94" curve="180"/>
+<wire x1="91.4399" y1="17.9387" x2="91.4399" y2="17.78" width="0.4064" layer="94"/>
+<wire x1="91.4399" y1="19.7485" x2="91.4399" y2="17.9387" width="0.4064" layer="94"/>
+<wire x1="91.4399" y1="17.9387" x2="92.2336" y2="17.9387" width="0.4064" layer="94" curve="180"/>
+<wire x1="92.2336" y1="17.9387" x2="92.2336" y2="19.7485" width="0.4064" layer="94"/>
+<wire x1="94.2973" y1="18.8912" x2="94.2973" y2="19.2087" width="0.4064" layer="94"/>
+<wire x1="94.2973" y1="19.2087" x2="93.6623" y2="19.8437" width="0.4064" layer="94" curve="90"/>
+<wire x1="93.6623" y1="19.8437" x2="93.0273" y2="19.2087" width="0.4064" layer="94" curve="90"/>
+<wire x1="94.2973" y1="18.8912" x2="93.6623" y2="18.5737" width="0.4064" layer="94"/>
+<wire x1="93.6623" y1="18.5737" x2="93.0273" y2="17.9387" width="0.4064" layer="94" curve="36.869898"/>
+<wire x1="93.6623" y1="17.6212" x2="93.3448" y2="17.6212" width="0.4064" layer="94"/>
+<wire x1="93.3448" y1="17.6212" x2="93.0273" y2="17.9387" width="0.4064" layer="94" curve="-90"/>
+<wire x1="94.2973" y1="17.6212" x2="94.2973" y2="18.8912" width="0.4064" layer="94"/>
+<wire x1="95.2498" y1="17.6212" x2="95.2498" y2="19.2087" width="0.4064" layer="94"/>
+<wire x1="95.2498" y1="19.2087" x2="95.8848" y2="19.8437" width="0.4064" layer="94" curve="-90"/>
+<wire x1="95.8848" y1="19.8437" x2="96.5198" y2="19.2087" width="0.4064" layer="94" curve="-90"/>
+<wire x1="97.4723" y1="19.2087" x2="97.4723" y2="18.5737" width="0.4064" layer="94"/>
+<wire x1="97.4723" y1="19.2087" x2="98.7423" y2="19.2087" width="0.4064" layer="94" curve="-180"/>
+<wire x1="98.7423" y1="19.2087" x2="97.4723" y2="18.5737" width="0.4064" layer="94"/>
+<wire x1="97.4723" y1="18.5737" x2="97.4723" y2="18.2562" width="0.4064" layer="94"/>
+<wire x1="97.4723" y1="18.2562" x2="98.1073" y2="17.6212" width="0.4064" layer="94" curve="90"/>
+<wire x1="98.7423" y1="18.2562" x2="98.1073" y2="17.6212" width="0.4064" layer="94" curve="-90"/>
+<wire x1="98.7423" y1="18.2562" x2="98.7423" y2="18.5737" width="0.4064" layer="94"/>
+<wire x1="86.4598" y1="23.1" x2="87.2311" y2="23.4972" width="0.4064" layer="94" curve="9.499291"/>
+<wire x1="87.2311" y1="23.4972" x2="89.1463" y2="21.9354" width="0.4064" layer="94"/>
+<wire x1="89.1463" y1="21.9354" x2="90.4596" y2="23.2487" width="0.4064" layer="94"/>
+<wire x1="90.4596" y1="23.2487" x2="88.8978" y2="25.1639" width="0.4064" layer="94"/>
+<wire x1="88.8978" y1="25.1639" x2="89.5595" y2="26.7615" width="0.4064" layer="94" curve="18.999182"/>
+<wire x1="89.5595" y1="26.7615" x2="92.0182" y2="27.0114" width="0.4064" layer="94"/>
+<wire x1="92.0182" y1="27.0114" x2="92.0182" y2="28.8686" width="0.4064" layer="94"/>
+<wire x1="92.0182" y1="28.8686" x2="89.5595" y2="29.1185" width="0.4064" layer="94"/>
+<wire x1="89.5595" y1="29.1185" x2="88.8978" y2="30.7161" width="0.4064" layer="94" curve="18.999182"/>
+<wire x1="88.8978" y1="30.7161" x2="90.4596" y2="32.6313" width="0.4064" layer="94"/>
+<wire x1="90.4596" y1="32.6313" x2="89.1463" y2="33.9446" width="0.4064" layer="94"/>
+<wire x1="89.1463" y1="33.9446" x2="87.2311" y2="32.3828" width="0.4064" layer="94"/>
+<wire x1="87.2311" y1="32.3828" x2="85.6335" y2="33.0445" width="0.4064" layer="94" curve="18.999182"/>
+<wire x1="85.6335" y1="33.0445" x2="85.3836" y2="35.5032" width="0.4064" layer="94"/>
+<wire x1="85.3836" y1="35.5032" x2="83.5264" y2="35.5032" width="0.4064" layer="94"/>
+<wire x1="83.5264" y1="35.5032" x2="83.2765" y2="33.0445" width="0.4064" layer="94"/>
+<wire x1="83.2765" y1="33.0445" x2="81.6789" y2="32.3828" width="0.4064" layer="94" curve="18.999182"/>
+<wire x1="81.6789" y1="32.3828" x2="79.7637" y2="33.9446" width="0.4064" layer="94"/>
+<wire x1="79.7637" y1="33.9446" x2="78.4504" y2="32.6313" width="0.4064" layer="94"/>
+<wire x1="78.4504" y1="32.6313" x2="80.0122" y2="30.7161" width="0.4064" layer="94"/>
+<wire x1="80.0122" y1="30.7161" x2="79.3505" y2="29.1185" width="0.4064" layer="94" curve="18.999182"/>
+<wire x1="79.3505" y1="29.1185" x2="76.8918" y2="28.8686" width="0.4064" layer="94"/>
+<wire x1="76.8918" y1="28.8686" x2="76.8918" y2="27.0114" width="0.4064" layer="94"/>
+<wire x1="76.8918" y1="27.0114" x2="79.3505" y2="26.7615" width="0.4064" layer="94"/>
+<wire x1="79.3505" y1="26.7615" x2="80.0122" y2="25.1639" width="0.4064" layer="94" curve="18.999182"/>
+<wire x1="80.0122" y1="25.1639" x2="78.4504" y2="23.2487" width="0.4064" layer="94"/>
+<wire x1="78.4504" y1="23.2487" x2="79.7637" y2="21.9354" width="0.4064" layer="94"/>
+<wire x1="79.7637" y1="21.9354" x2="81.6789" y2="23.4972" width="0.4064" layer="94"/>
+<wire x1="81.6789" y1="23.4972" x2="82.4502" y2="23.1" width="0.4064" layer="94" curve="9.499291"/>
+<wire x1="82.4502" y1="23.1" x2="83.5437" y2="25.74" width="0.4064" layer="94"/>
+<wire x1="83.5437" y1="25.74" x2="82.0737" y2="27.94" width="0.4064" layer="94" curve="-67.502133"/>
+<wire x1="82.0737" y1="27.94" x2="85.3663" y2="25.74" width="0.4064" layer="94" curve="-247.498918"/>
+<wire x1="85.3663" y1="25.74" x2="86.4598" y2="23.1" width="0.4064" layer="94"/>
+<polygon width="0.4064" layer="94">
+<vertex x="86.4598" y="23.1" curve="9.499291"/>
+<vertex x="87.2311" y="23.4972"/>
+<vertex x="89.1463" y="21.9354"/>
+<vertex x="90.4596" y="23.2487"/>
+<vertex x="88.8978" y="25.1639" curve="18.999182"/>
+<vertex x="89.5595" y="26.7615"/>
+<vertex x="92.0182" y="27.0114"/>
+<vertex x="92.0182" y="28.8686"/>
+<vertex x="89.5595" y="29.1185" curve="18.999182"/>
+<vertex x="88.8978" y="30.7161"/>
+<vertex x="90.4596" y="32.6313"/>
+<vertex x="89.1463" y="33.9446"/>
+<vertex x="87.2311" y="32.3828" curve="18.999182"/>
+<vertex x="85.6335" y="33.0445"/>
+<vertex x="85.3836" y="35.5032"/>
+<vertex x="83.5264" y="35.5032"/>
+<vertex x="83.2765" y="33.0445" curve="18.999182"/>
+<vertex x="81.6789" y="32.3828"/>
+<vertex x="79.7637" y="33.9446"/>
+<vertex x="78.4504" y="32.6313"/>
+<vertex x="80.0122" y="30.7161" curve="18.999182"/>
+<vertex x="79.3505" y="29.1185"/>
+<vertex x="76.8918" y="28.8686"/>
+<vertex x="76.8918" y="27.0114"/>
+<vertex x="79.3505" y="26.7615" curve="18.999182"/>
+<vertex x="80.0122" y="25.1639"/>
+<vertex x="78.4504" y="23.2487"/>
+<vertex x="79.7637" y="21.9354"/>
+<vertex x="81.6789" y="23.4972" curve="9.499291"/>
+<vertex x="82.4502" y="23.1"/>
+<vertex x="83.5437" y="25.74" curve="-67.502133"/>
+<vertex x="82.0737" y="27.94" curve="-247.498918"/>
+<vertex x="85.3663" y="25.74"/>
+</polygon>
+<wire x1="68.58" y1="15.24" x2="68.58" y2="38.1" width="0.1016" layer="94"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="DINA4_L" prefix="FRAME" uservalue="yes">
+<description>&lt;b&gt;FRAME&lt;/b&gt;&lt;p&gt;
+DIN A4, landscape with extra doc field</description>
+<gates>
+<gate name="G$1" symbol="DINA4_L" x="0" y="0"/>
+<gate name="G$2" symbol="DOCFIELD" x="162.56" y="0" addlevel="must"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -13618,7 +13754,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/1053.pdf"&gt;
 </classes>
 <parts>
 <part name="U1" library="MSP430FR4133" deviceset="MSP430FR4133" device=""/>
-<part name="FRAME1" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="DINA4_L" device="" value="FRAME"/>
 <part name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="1M"/>
 <part name="C7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="1 uF"/>
 <part name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
@@ -13661,8 +13796,9 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/1053.pdf"&gt;
 <part name="BT1" library="1053" deviceset="1053" device="" value="CR2450"/>
 <part name="GND14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="SUPPLY9" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+4.1V" device="" value="3V"/>
-<part name="R6" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
-<part name="R7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
+<part name="R6" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="0R"/>
+<part name="R7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="0R"/>
+<part name="FRAME1" library="frames" deviceset="DINA4_L" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -13681,12 +13817,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/1053.pdf"&gt;
 <instance part="U1" gate="G$1" x="33.02" y="166.37" smashed="yes">
 <attribute name="NAME" x="39.37" y="173.99" size="1.778" layer="95" align="center-left"/>
 <attribute name="VALUE" x="39.37" y="171.45" size="1.778" layer="96" align="center-left"/>
-</instance>
-<instance part="FRAME1" gate="G$1" x="0" y="0" smashed="yes"/>
-<instance part="FRAME1" gate="G$2" x="162.56" y="0" smashed="yes">
-<attribute name="LAST_DATE_TIME" x="173.99" y="1.27" size="2.54" layer="94"/>
-<attribute name="SHEET" x="255.27" y="6.35" size="2.54" layer="94"/>
-<attribute name="DRAWING_NAME" x="187.96" y="11.557" size="2.54" layer="94"/>
 </instance>
 <instance part="R4" gate="G$1" x="218.44" y="99.06" smashed="yes" rot="R270">
 <attribute name="NAME" x="220.218" y="100.0506" size="1.778" layer="95"/>
@@ -13849,6 +13979,12 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/1053.pdf"&gt;
 <instance part="R7" gate="G$1" x="209.55" y="91.44" smashed="yes" rot="R180">
 <attribute name="NAME" x="207.01" y="92.9386" size="1.778" layer="95"/>
 <attribute name="VALUE" x="207.01" y="88.138" size="1.778" layer="96"/>
+</instance>
+<instance part="FRAME1" gate="G$1" x="0" y="0" smashed="yes"/>
+<instance part="FRAME1" gate="G$2" x="162.56" y="0" smashed="yes">
+<attribute name="LAST_DATE_TIME" x="173.99" y="1.27" size="2.54" layer="94"/>
+<attribute name="SHEET" x="255.27" y="6.35" size="2.54" layer="94"/>
+<attribute name="DRAWING_NAME" x="187.96" y="11.557" size="2.54" layer="94"/>
 </instance>
 </instances>
 <busses>
