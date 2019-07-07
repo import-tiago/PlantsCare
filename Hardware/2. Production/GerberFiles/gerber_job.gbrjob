@@ -1,7 +1,7 @@
 {
     "Header": {
         "Comment": "All values are metric (mm)",
-        "CreationDate": "2019-07-06T22:51:01Z",
+        "CreationDate": "2019-07-07T10:15:34Z",
         "GenerationSoftware": {
             "Application": "EAGLE",
             "Vendor": "Autodesk",
@@ -13,7 +13,7 @@
         "BoardThickness": 1.57,
         "LayerNumber": 2,
         "Name": {
-            "ProjectId": "Soil Moisture Meter (IoT Device)"
+            "ProjectId": "PlantsCare"
         },
         "Owner": "Tiago Silva <tiagodepaulasilva@gmail.com>",
         "Size": {
