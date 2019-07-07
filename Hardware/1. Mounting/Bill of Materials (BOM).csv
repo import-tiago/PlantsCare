@@ -1,13 +1,13 @@
 "Qty","Parts","Description","Value","Package"
-1,R2,SMD Resistor,47k,R0603
-1,R4,SMD Resistor,1M,R0603
+1,R2,SMD Resistor,47k ±5%,R0603
+1,R4,SMD Resistor,1M ±5%,R0603
 2,R6/R7,SMD Resistor,0R,R0603
-3,R1/R3/R5,SMD Resistor,10k,R0603
-1,C4,SMD Capacitor,1 nF,C0603
-1,C7,SMD Capacitor,1 uF,C0603
-1,C1,SMD Capacitor,10 uF,C0603
-2,C2/C3,SMD Capacitor,100 nF,C0603
-2,C5/C6,SMD Capacitor,22 pF,C0603
+3,R1/R3/R5,SMD Resistor,10k ±5%,R0603
+1,C4,SMD Capacitor,1 nF / 50V,C0603
+1,C7,SMD Capacitor,1 uF / 6.3V,C0603
+1,C1,SMD Capacitor,10 uF / 50V,C0603
+2,C2/C3,SMD Capacitor,100 nF / 50V,C0603
+2,C5/C6,SMD Capacitor,22 pF / 50V,C0603
 1,D1,Small Signal Fast Switching Diode,1N4148,SOD523
 1,LED1,SMD LED,Blue,L0805
 1,U1,Microcontroller,MSP430FR4133IG48R,TSSOP-48
