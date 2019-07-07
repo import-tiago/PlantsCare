@@ -8165,7 +8165,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="16.865" y="146.875" size="1.27" layer="25" rot="R270" display="off"/>
 <attribute name="VALUE" x="14.325" y="146.875" size="1.27" layer="27" rot="R270" display="off"/>
 </element>
-<element name="J1" library="con-molex" library_urn="urn:adsk.eagle:library:165" package="7395-04" package3d_urn="urn:adsk.eagle:package:8078648/1" value="ICSP" x="23.69" y="164.63" smashed="yes" rot="R90">
+<element name="CN1" library="con-molex" library_urn="urn:adsk.eagle:library:165" package="7395-04" package3d_urn="urn:adsk.eagle:package:8078648/1" value="ICSP" x="23.69" y="164.63" smashed="yes" rot="R90">
 <attribute name="MF" value="MOLEX" x="37.66" y="201.46" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="" x="37.66" y="201.46" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="NAME" x="20.7421" y="169.8101" size="1.016" layer="25" ratio="10" rot="R270" display="off"/>
@@ -8267,7 +8267,7 @@ design rules under a new name.</description>
 <contactref element="C4" pad="2"/>
 <contactref element="C3" pad="2"/>
 <contactref element="S1" pad="1"/>
-<contactref element="J1" pad="4"/>
+<contactref element="CN1" pad="4"/>
 <contactref element="BT1" pad="1"/>
 <contactref element="R6" pad="2"/>
 <contactref element="R7" pad="1"/>
@@ -8386,7 +8386,7 @@ design rules under a new name.</description>
 <contactref element="C2" pad="1"/>
 <contactref element="R2" pad="1"/>
 <contactref element="C3" pad="1"/>
-<contactref element="J1" pad="1"/>
+<contactref element="CN1" pad="1"/>
 <contactref element="BT1" pad="2"/>
 <wire x1="14.96" y1="158.29" x2="14.96" y2="159.392" width="0.1524" layer="1"/>
 <wire x1="17.44" y1="189.55" x2="16.559" y2="189.55" width="0.1524" layer="1"/>
@@ -8491,7 +8491,7 @@ design rules under a new name.</description>
 <contactref element="C4" pad="1"/>
 <contactref element="R2" pad="2"/>
 <contactref element="U1" pad="16"/>
-<contactref element="J1" pad="2"/>
+<contactref element="CN1" pad="2"/>
 <wire x1="15.46" y1="159.392" x2="15.46" y2="158.3912125" width="0.1524" layer="1"/>
 <wire x1="20.837" y1="165.9" x2="23.69" y2="165.9" width="0.1524" layer="1"/>
 <wire x1="15.46" y1="159.392" x2="15.46" y2="160.523" width="0.1524" layer="1"/>
@@ -8508,7 +8508,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="SBWTCK">
 <contactref element="U1" pad="17"/>
-<contactref element="J1" pad="3"/>
+<contactref element="CN1" pad="3"/>
 <wire x1="15.96" y1="160.437" x2="15.96" y2="159.392" width="0.1524" layer="1"/>
 <wire x1="23.69" y1="163.36" x2="18.883" y2="163.36" width="0.1524" layer="1"/>
 <wire x1="18.883" y1="163.36" x2="15.96" y2="160.437" width="0.1524" layer="1"/>

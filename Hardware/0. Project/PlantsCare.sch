@@ -13790,7 +13790,7 @@ DIN A4, landscape with extra doc field</description>
 <part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="Q1" library="crystal-geyer_V1_0" library_urn="urn:adsk.eagle:library:203" deviceset="KX-327" device="-NHF" package3d_urn="urn:adsk.eagle:package:11937/1" value="32.768 kHz"/>
-<part name="J1" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-?-04" device="05-7048" package3d_urn="urn:adsk.eagle:package:8078648/1" value="ICSP"/>
+<part name="CN1" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-?-04" device="05-7048" package3d_urn="urn:adsk.eagle:package:8078648/1" value="ICSP"/>
 <part name="SUPPLY2" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+4.1V" device="" value="3V"/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="BT1" library="1053" deviceset="1053" device="" value="CR2450"/>
@@ -13943,17 +13943,17 @@ DIN A4, landscape with extra doc field</description>
 <attribute name="NAME" x="192.405" y="150.495" size="1.778" layer="95"/>
 <attribute name="VALUE" x="187.96" y="143.51" size="1.778" layer="96"/>
 </instance>
-<instance part="J1" gate="-1" x="15.24" y="34.29" smashed="yes" rot="MR0">
+<instance part="CN1" gate="-1" x="15.24" y="34.29" smashed="yes" rot="MR0">
 <attribute name="NAME" x="12.7" y="33.528" size="1.524" layer="95" rot="MR0"/>
 <attribute name="VALUE" x="11.938" y="39.243" size="1.778" layer="96" rot="MR180"/>
 </instance>
-<instance part="J1" gate="-2" x="15.24" y="29.21" smashed="yes" rot="MR0">
+<instance part="CN1" gate="-2" x="15.24" y="29.21" smashed="yes" rot="MR0">
 <attribute name="NAME" x="12.7" y="28.448" size="1.524" layer="95" rot="MR0"/>
 </instance>
-<instance part="J1" gate="-3" x="15.24" y="24.13" smashed="yes" rot="MR0">
+<instance part="CN1" gate="-3" x="15.24" y="24.13" smashed="yes" rot="MR0">
 <attribute name="NAME" x="12.7" y="23.368" size="1.524" layer="95" rot="MR0"/>
 </instance>
-<instance part="J1" gate="-4" x="15.24" y="19.05" smashed="yes" rot="MR0">
+<instance part="CN1" gate="-4" x="15.24" y="19.05" smashed="yes" rot="MR0">
 <attribute name="NAME" x="12.7" y="18.288" size="1.524" layer="95" rot="MR0"/>
 </instance>
 <instance part="SUPPLY2" gate="P" x="21.59" y="41.91" smashed="yes" rot="MR0">
@@ -14094,7 +14094,7 @@ DIN A4, landscape with extra doc field</description>
 <wire x1="228.6" y1="132.08" x2="228.6" y2="142.24" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="J1" gate="-4" pin="S"/>
+<pinref part="CN1" gate="-4" pin="S"/>
 <wire x1="17.78" y1="19.05" x2="21.59" y2="19.05" width="0.1524" layer="91"/>
 <pinref part="GND1" gate="1" pin="GND"/>
 <wire x1="21.59" y1="13.97" x2="21.59" y2="19.05" width="0.1524" layer="91"/>
@@ -14181,7 +14181,7 @@ DIN A4, landscape with extra doc field</description>
 <wire x1="144.78" y1="54.61" x2="144.78" y2="52.07" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="J1" gate="-1" pin="S"/>
+<pinref part="CN1" gate="-1" pin="S"/>
 <wire x1="17.78" y1="34.29" x2="21.59" y2="34.29" width="0.1524" layer="91"/>
 <pinref part="SUPPLY2" gate="P" pin="+4.1V"/>
 <wire x1="21.59" y1="34.29" x2="21.59" y2="39.37" width="0.1524" layer="91"/>
@@ -14291,7 +14291,7 @@ DIN A4, landscape with extra doc field</description>
 <label x="22.86" y="128.27" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="J1" gate="-2" pin="S"/>
+<pinref part="CN1" gate="-2" pin="S"/>
 <wire x1="17.78" y1="29.21" x2="22.86" y2="29.21" width="0.1524" layer="91"/>
 <label x="22.86" y="29.21" size="1.27" layer="95" ratio="5" rot="MR180" xref="yes"/>
 </segment>
@@ -14303,7 +14303,7 @@ DIN A4, landscape with extra doc field</description>
 <label x="22.86" y="125.73" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="J1" gate="-3" pin="S"/>
+<pinref part="CN1" gate="-3" pin="S"/>
 <wire x1="17.78" y1="24.13" x2="22.86" y2="24.13" width="0.1524" layer="91"/>
 <label x="22.86" y="24.13" size="1.27" layer="95" ratio="5" rot="MR180" xref="yes"/>
 </segment>
@@ -14326,9 +14326,13 @@ DIN A4, landscape with extra doc field</description>
 <errors>
 <approved hash="102,1,137.16,71.12,+4.1V,3V,,,,"/>
 <approved hash="102,1,127,71.12,+4.1V,3V,,,,"/>
-<approved hash="102,1,22.86,166.37,+4.1V,3V,,,,"/>
+<approved hash="102,1,25.4,166.37,+4.1V,3V,,,,"/>
+<approved hash="102,1,48.26,92.71,+4.1V,3V,,,,"/>
+<approved hash="102,1,60.96,92.71,+4.1V,3V,,,,"/>
 <approved hash="102,1,157.48,162.56,+4.1V,3V,,,,"/>
 <approved hash="102,1,144.78,54.61,+4.1V,3V,,,,"/>
+<approved hash="102,1,21.59,39.37,+4.1V,3V,,,,"/>
+<approved hash="102,1,21.59,76.2,+4.1V,3V,,,,"/>
 <approved hash="104,1,33.02,133.35,U1,DVSS,GND,,,"/>
 <approved hash="104,1,33.02,130.81,U1,DVCC,3V,,,"/>
 <approved hash="202,1,33.02,118.11,U1,P1.6/TA0.2/TDI/TCLK/A6,,,,"/>
@@ -14340,6 +14344,7 @@ DIN A4, landscape with extra doc field</description>
 <approved hash="104,1,121.92,48.26,PCB1,VBAT,3V,,,"/>
 <approved hash="104,1,121.92,50.8,PCB1,GND3,GND,,,"/>
 <approved hash="113,1,245.432,139.7,LED1,,,,,"/>
+<approved hash="113,1,131.976,90.066,FRAME1,,,,,"/>
 </errors>
 </schematic>
 </drawing>
