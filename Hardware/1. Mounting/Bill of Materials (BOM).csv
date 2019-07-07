@@ -14,5 +14,5 @@
 1,Q1,SMD Crystal,32.768 kHz,3.2 x 1.5
 1,PCB1,Qualcomm BLE CSRmesh Module,BLE-1010 MPCBA;-
 1,BT1,Through Hole Coin Cell Battery Holder,CR2450;-
-1,S1,SMD Switch, Momentary, Normally Open,SPST-NO,3 x 6 mm
-1,CN1,Through Hole Connector 4 Pins, 2 mm pitch;-;-
+1,S1,SMD Switch/Momentary/Normally Open,SPST-NO,3 x 6 mm
+1,CN1,Through Hole Connector/4 Pins/2 mm pitch;-;-
