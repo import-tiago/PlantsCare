@@ -1,5 +1,5 @@
 # PlantsCare
-![Status](https://img.shields.io/badge/Status-Finished-green.svg) [![Donate](https://img.shields.io/badge/Donate-Buy%20Me%20a%20Coffee-yellow.svg)](https://www.buymeacoffee.com/TiagoPaulaSilva)
+![Status](https://img.shields.io/badge/Status-UnderDev-red.svg) [![Donate](https://img.shields.io/badge/Donate-Buy%20Me%20a%20Coffee-yellow.svg)](https://www.buymeacoffee.com/TiagoPaulaSilva)
 
 PlantsCare it's a ultra low power standalone capacitive soil moisture meter with bluetooth communication for IoT applications.
 
