@@ -1,4 +1,6 @@
 # PlantsCare
+![Status](https://img.shields.io/badge/Status-UnderDev-red.svg) [![Donate](https://img.shields.io/badge/Donate-Buy%20Me%20a%20Coffee-yellow.svg)](https://www.buymeacoffee.com/TiagoPaulaSilva)
+
 PlantsCare it's a ultra low power standalone capacitive soil moisture meter with bluetooth communication for IoT applications.
 
 ## Features
@@ -6,7 +8,7 @@ PlantsCare it's a ultra low power standalone capacitive soil moisture meter with
 
 ##### Wireless Technology / [Bluetooth Low Energy - CSR1010](https://github.com/TiagoPaulaSilva/WorkshySwitch/blob/master/Hardware/3.%20Datasheets/BLE/CSR1010%20(BLE%20IC)%20-%20Datasheet.pdf)
 
-##### Low Power Requirements / CR2450 Battery Life > 2 years
+##### Low Power Requirements / [CR2450 Battery Life > 2 years](https://github.com/TiagoPaulaSilva/PlantsCare/blob/master/Hardware/3.%20Datasheets/Battery/CR2450.pdf)
 
 ##### Hardware Project / [Autodesk EAGLE](https://www.autodesk.com/products/eagle/free-download)
 
