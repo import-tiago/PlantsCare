@@ -1,7 +1,10 @@
-# .gitattributes file which reclassifies .sch and .brd files as Eagle:
 *.sch linguist-language=Eagle
 *.brd linguist-language=Eagle
 
-* linguist-vendored
+special-vendored-path/* linguist-vendored
 *.sch linguist-vendored=false
 *.brd linguist-vendored=false
+
+
+*.sch linguist-detectable=true
+*.brd linguist-detectable=true
