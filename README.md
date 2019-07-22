@@ -1,7 +1,7 @@
 # PlantsCare
 ![Status](https://img.shields.io/badge/Status-UnderDev-red.svg) [![Donate](https://img.shields.io/badge/Donate-Buy%20Me%20a%20Coffee-yellow.svg)](https://www.buymeacoffee.com/TiagoPaulaSilva)
 
-PlantsCare it's a ultra low power standalone capacitive soil moisture meter with bluetooth communication for IoT applications.
+PlantsCare it's an IoT device for ultra low power standalone cpacitive soil moisture meter.
 
 ## Features
 ##### Controller Device / [16-bit, RISC, MSP430 FRAM-based Microcontroller](https://github.com/TiagoPaulaSilva/PlantsCare/blob/master/Hardware/3.%20Datasheets/MCU/MSP430%20-%20Datasheet.pdf)
