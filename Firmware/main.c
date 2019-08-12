@@ -60,9 +60,9 @@
 //      --|RST            |
 //        |               |
 //        |          P1.0 |--> LED
-//        |          P1.4 |---> MCLK = 16MHz
-//        |          P8.0 |---> SMCLK = 16MHz
-//        |          P8.1 |---> ACLK = 32768Hz
+//        |          P1.4 |---> MCLK = 1 MHz
+//        |               |
+//        |               |
 //
 //
 //   Kathryn Adamsky
@@ -78,30 +78,28 @@ int main(void)
 
     P4SEL0 |= BIT1 | BIT2;                  // set XT1 pin as second function
 
-        do
-        {
-            CSCTL7 &= ~(XT1OFFG | DCOFFG);      // Clear XT1 and DCO fault flag
-            SFRIFG1 &= ~OFIFG;
-        }while (SFRIFG1 & OFIFG);               // Test oscillator fault flag
+    do
+    {
+        CSCTL7 &= ~(XT1OFFG | DCOFFG);           // Clear XT1 and DCO fault flag
+        SFRIFG1 &= ~OFIFG;
+    }while (SFRIFG1 & OFIFG);                    // Test oscillator fault flag
 
-        __bis_SR_register(SCG0);                // disable FLL
-        CSCTL3 |= SELREF__XT1CLK;               // Set XT1CLK as FLL reference source
-        CSCTL0 = 0;                             // clear DCO and MOD registers
-        __bic_SR_register(SCG0);                // enable FLL
+    __bis_SR_register(SCG0);                     // disable FLL
 
-        while(CSCTL7 & (FLLUNLOCK0 | FLLUNLOCK1)); // Poll until FLL is locked
-        CSCTL7 &= ~DCOFFG;                         // Clear DCO fault flag
-        CSCTL4 = SELMS__DCOCLKDIV | SELA__XT1CLK;  // set ACLK = XT1CLK = 32768Hz
-                                                   // DCOCLK = MCLK and SMCLK source
+    CSCTL3 |= SELREF__XT1CLK;                    // Set XT1CLK as FLL reference source
+    CSCTL0 = 0;                                  // clear DCO and MOD registers
 
+    __bic_SR_register(SCG0);                     // enable FLL
 
+    while(CSCTL7 & (FLLUNLOCK0 | FLLUNLOCK1));   // Poll until FLL is locked
+
+    CSCTL7 &= ~DCOFFG;                           // Clear DCO fault flag
+    CSCTL4 = SELMS__DCOCLKDIV | SELA__XT1CLK;    // set ACLK = XT1CLK = 32768Hz and DCOCLK = MCLK and SMCLK source
     CSCTL4 = SELMS__DCOCLKDIV | SELA__XT1CLK;    // set XT1 (~32768Hz) as ACLK source, ACLK = 32768Hz
                                                  // default DCOCLKDIV as MCLK and SMCLK source
 
     P1DIR |= BIT5 + BIT4;                        // set MCLK and LED pin as output
     P1SEL0 |= BIT4;                              // set MCLK pin as second function
-    P8DIR |= BIT5 | BIT1;                        // set ACLK and SMCLK pin as output
-    P8SEL0 |= BIT5 | BIT1;                       // set ACLK and SMCLK pin as second function
 
     PM5CTL0 &= ~LOCKLPM5;                        // Disable the GPIO power-on default high-impedance mode
                                                  // to activate previously configured port settings
@@ -109,6 +107,6 @@ int main(void)
     while(1)
     {
         P1OUT ^= BIT5;                           // Toggle P1.0 using exclusive-OR
-        __delay_cycles(8000000);                 // Delay for 80000*(1/MCLK)=0.5s
+        __delay_cycles(8000000);
     }
 }
