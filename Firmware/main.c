@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdio.h>
 
-
 #define HIGH                    1
 #define LOW                     0
 #define TRUE                    1
@@ -11,8 +10,8 @@
 #define MASTER                  1
 #define SLAVE                   0
 
-#define ISR_TIMER0_A0_OFFSET 500
-#define BUFFER_LENGTH 51
+#define ISR_TIMER0_A0_OFFSET    500
+#define BUFFER_LENGTH           51
 
 #define SHORT_DELAY             100    // 100ms
 #define MEDIUM_DELAY            500    // 500ms
@@ -23,27 +22,43 @@
 #define MEDIUM_TIMEOUT          5000   // 5s
 #define LONG_TIMEOUT            10000  // 10s
 
-
 #define SHORT_BUTTON_PRESS      1500   // 2s
 #define MEDIUM_BUTTON_PRESS     3500   // 5s
 #define LONG_BUTTON_PRESS       8000  // 10s
 
 
 
+//Capacitive Soil Moisture
+#define N_SAMPLES               50
+#define kL_CALIBRATION          0
+#define kA_CALIBRATION          0.3333
+
+/* GLOBAL VARIABLES */
+
+// UART Peripheral
 volatile unsigned char Buffer_UART[BUFFER_LENGTH];
-volatile unsigned char Buffer_ADC[BUFFER_LENGTH];
-
-unsigned char array[BUFFER_LENGTH];
-
 unsigned int Index_UART;
+
+// TIMER Peripheral
+unsigned long timebase;
+
+// ADC Peripheral
+volatile unsigned char Buffer_ADC[BUFFER_LENGTH];
 unsigned int Index_ADC;
 
+//Capacitive Soil Moisture
+unsigned long Sensor_Value;
+unsigned int Soil_Moisture;
+
+// LED
 unsigned int LED_Period;
-unsigned long timebase;
-unsigned int Sensor_Value;
+
+// Auxiliaries
+unsigned char array[BUFFER_LENGTH];
 
 
-//DEFINI√á√ÉO DOS PINOS UTILIZADOS PELO uC
+
+//DEFINI«√O DOS PINOS UTILIZADOS PELO uC
 #define UART_TX_PIN                     BIT1 // P1.1
 #define UART_RX_PIN                     BIT0 // P1.0
 #define LED_STATUS_PIN                  BIT3 // P1.3
@@ -51,7 +66,7 @@ unsigned int Sensor_Value;
 #define SENSOR_CAPACITIVE_PIN              2 // P1.2
 
 void init_TimerA0(void);
-void Write_UART(char* sentence);
+void Write_UART(unsigned char* sentence);
 void init_UART(unsigned long _baudrate);
 void init_GPIO(void);
 void init_Oscillator(void);
@@ -60,13 +75,18 @@ void init_ADC(void);
 void init_Global_Variables(void);
 char* itoa(int value, char* result, int base);
 
-void ADC_Stop(void);
+
+unsigned char ADC_Read(void);
 void ADC_Start(void);
+void ADC_Stop(void);
+
 void delay(unsigned int n);
 
 void LED_Blink(unsigned int _period);
-_Bool Write_Wait_Response(char* _command, char* _expected_answer, unsigned int _timeout);
-void setup_BLE(_Bool HIERARCHY, char* newName) ;
+_Bool Write_Wait_Response(unsigned char* _command, char* _expected_answer, unsigned int _timeout);
+void setup_BLE(_Bool HIERARCHY, char* newName);
+
+unsigned int Get_Soil_Moisture();
 
 unsigned long millis();
 
@@ -81,49 +101,45 @@ int main(void){
 
     __bis_SR_register(GIE);
 
-    Write_Wait_Response("AT\r", "OK", SHORT_TIMEOUT);
+    //setup_BLE(SLAVE, "PlantsCare");
 
-    setup_BLE(SLAVE, "PlantsCare");
-
-    while(1)
-    {
-        Write_UART("AT\r");
-        delay(1000);
-    }
-    __no_operation();
-
-   // ADC_Start();
 
     while(1)
     {
-        /*
-        ADC_Start();
-        itoa(Buffer_ADC[Index_ADC-1], array, 10);
-        Write_UART(array);
-        Write_UART("\r\n");
-        */
-        Index_ADC = 0;
-        do
-        {
-            ADC_Start();
 
-        }while(Index_ADC != 0);
+        Soil_Moisture = Get_Soil_Moisture();
         __no_operation();
-
-        char i;
-        for(i = 0; i < BUFFER_LENGTH-1; i++)
-        {
-            Sensor_Value += Buffer_ADC[i];
-        }
-        Sensor_Value /= (BUFFER_LENGTH-1);
-        __no_operation();
-        itoa(Sensor_Value, array, 10);
+/*
+        itoa(Soil_Moisture, (char*)array, 10);
         Write_UART(array);
         Write_UART("\r\n");
 
         delay(500);
-
+ */
     }
+
+}
+
+unsigned int Get_Soil_Moisture(){
+    char i;
+    int _soil_moisture;
+
+    for(i = 0; i < N_SAMPLES; i++)
+    {
+        Sensor_Value += ADC_Read();
+    }
+
+    Sensor_Value /= N_SAMPLES;
+
+    _soil_moisture = (Sensor_Value * kA_CALIBRATION) + kL_CALIBRATION;
+
+    if(_soil_moisture < 0)
+        _soil_moisture = 0;
+    if(_soil_moisture > 100)
+        _soil_moisture = 100;
+
+    return _soil_moisture;
+
 }
 
 void init_Global_Variables(void){
@@ -220,8 +236,8 @@ void delay(unsigned int n) {
   }
 }
 
-void Write_UART(char* sentence) {
-    unsigned int size = strlen(sentence);
+void Write_UART(unsigned char* sentence) {
+    unsigned int size = strlen((char*) sentence);
     unsigned int i = 0;
 
     while(size > 0) {
@@ -260,14 +276,25 @@ void ADC_Stop(void){
 }
 
 void ADC_Start(void){
-    ADCCTL0 |= ADCENC | ADCSC;                           // Sampling and conversion start
+
+    ADCCTL0 |= ADCENC;          // Sampling and conversion start
+    ADCCTL0 |= ADCSC;
     while(ADCCTL1 & ADCBUSY);
+}
+
+unsigned char ADC_Read(void){
+
+    ADC_Start();
+    if(Index_ADC > 0)
+        return Buffer_ADC[Index_ADC-1];
+    else
+        return Buffer_ADC[BUFFER_LENGTH-1];
 }
 
 void init_ADC(void){
     ADCCTL0  &= ~ADCENC;            // Disable ADC conversion (needed for the next steps)
     ADCCTL0  |= ADCSHT_12 | ADCON;  // ADC sample-and-hold time = 1024 ADCCLK cycles | ADC on
-    ADCCTL1  |=  ADCSHP;            // ADC sample-and-hold pulse-mode select = SAMPCON signal is sourced from the sampling timer
+    ADCCTL1  |= ADCSHP;            // ADC sample-and-hold pulse-mode select = SAMPCON signal is sourced from the sampling timer
     ADCCTL2  |= ADCRES;             // 10-bit conversion results
     ADCMCTL0 |= ADCINCH_2;          // A2 ADC input select; Vref=AVCC
     ADCIE    |= ADCIE0;             // Enable ADC conv complete interrupt
@@ -306,7 +333,7 @@ void setup_BLE(_Bool _HIERARCHY, char* _new_name) {
 
     __bis_SR_register(GIE);
 
-    char _slave_name[20];
+    unsigned char _slave_name[20];
     char _step = 0;
 
     //TODO: in PCB version 1.2 or later, changes this lines for BLE_STATUS checking
@@ -315,7 +342,7 @@ void setup_BLE(_Bool _HIERARCHY, char* _new_name) {
     Write_UART("AT+DROP\r"); delay(100);
     Write_UART("AT+DROP\r"); delay(100);
 
-    sprintf(_slave_name, "%s%s\r", "AT+NAME", _new_name);
+    sprintf((char*)_slave_name, "%s%s\r", "AT+NAME", (char*)_new_name);
     if(_HIERARCHY == SLAVE){
         _step = 0;
         do{
@@ -400,12 +427,12 @@ void setup_BLE(_Bool _HIERARCHY, char* _new_name) {
     }
 }
 
-_Bool Write_Wait_Response(char* _command, char* _expected_answer, unsigned int _timeout) {
+_Bool Write_Wait_Response(unsigned char* _command, char* _expected_answer, unsigned int _timeout) {
 
     _Bool _answer = FALSE;
     unsigned long _previous_time;
 
-    memset(Buffer_UART, '\0', sizeof(Buffer_UART));
+    memset((void*)Buffer_UART, '\0', sizeof(Buffer_UART));
     Index_UART = 0;
 
     _previous_time = millis();
