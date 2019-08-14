@@ -13810,7 +13810,7 @@ DIN A4, landscape with extra doc field</description>
 <wire x1="215.9" y1="45.72" x2="215.9" y2="83.82" width="0.508" layer="97"/>
 <rectangle x1="193.04" y1="45.72" x2="215.9" y2="83.82" layer="208"/>
 <text x="199.39" y="55.88" size="5.08" layer="97" distance="40" rot="R90">SOIL</text>
-<text x="253.365" y="1.27" size="2.54" layer="94" ratio="5">1.0</text>
+<text x="253.365" y="1.27" size="2.54" layer="94" ratio="5">1.1</text>
 <text x="182.245" y="6.35" size="2.54" layer="94" ratio="5">Complete Schematic</text>
 <wire x1="2.54" y1="177.8" x2="2.54" y2="92.71" width="0.508" layer="152" style="longdash"/>
 <wire x1="2.54" y1="92.71" x2="156.21" y2="92.71" width="0.508" layer="152" style="longdash"/>
@@ -13872,8 +13872,8 @@ DIN A4, landscape with extra doc field</description>
 <instance part="GND5" gate="1" x="83.82" y="8.89" smashed="yes">
 <attribute name="VALUE" x="81.28" y="6.35" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY6" gate="P" x="137.16" y="74.93" smashed="yes">
-<attribute name="VALUE" x="135.255" y="78.105" size="1.778" layer="96"/>
+<instance part="SUPPLY6" gate="P" x="133.35" y="74.93" smashed="yes">
+<attribute name="VALUE" x="131.445" y="78.105" size="1.778" layer="96"/>
 </instance>
 <instance part="SUPPLY5" gate="P" x="127" y="74.93" smashed="yes">
 <attribute name="VALUE" x="125.095" y="78.105" size="1.778" layer="96"/>
@@ -13961,15 +13961,15 @@ DIN A4, landscape with extra doc field</description>
 <instance part="SUPPLY8" gate="P" x="40.64" y="34.29" smashed="yes">
 <attribute name="VALUE" x="38.735" y="37.465" size="1.778" layer="96"/>
 </instance>
-<instance part="C3" gate="G$1" x="144.78" y="50.8" smashed="yes">
-<attribute name="NAME" x="147.828" y="50.673" size="1.778" layer="95"/>
-<attribute name="VALUE" x="147.828" y="47.879" size="1.778" layer="96"/>
+<instance part="C3" gate="G$1" x="144.78" y="35.56" smashed="yes">
+<attribute name="NAME" x="147.828" y="35.433" size="1.778" layer="95"/>
+<attribute name="VALUE" x="147.828" y="32.639" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY7" gate="P" x="144.78" y="58.42" smashed="yes">
-<attribute name="VALUE" x="142.875" y="61.595" size="1.778" layer="96"/>
+<instance part="SUPPLY7" gate="P" x="144.78" y="43.18" smashed="yes">
+<attribute name="VALUE" x="142.875" y="46.355" size="1.778" layer="96"/>
 </instance>
-<instance part="GND6" gate="1" x="144.78" y="40.64" smashed="yes">
-<attribute name="VALUE" x="142.24" y="38.1" size="1.778" layer="96"/>
+<instance part="GND6" gate="1" x="144.78" y="25.4" smashed="yes">
+<attribute name="VALUE" x="142.24" y="22.86" size="1.778" layer="96"/>
 </instance>
 <instance part="GND12" gate="1" x="231.14" y="125.73" smashed="yes">
 <attribute name="VALUE" x="228.6" y="123.19" size="1.778" layer="96"/>
@@ -14042,9 +14042,9 @@ DIN A4, landscape with extra doc field</description>
 <label x="182.88" y="102.87" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<label x="31.75" y="147.32" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
-<pinref part="U1" gate="G$1" pin="P7.0/L0"/>
-<wire x1="41.91" y1="147.32" x2="31.75" y2="147.32" width="0.1524" layer="91"/>
+<label x="30.48" y="106.68" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
+<wire x1="30.48" y1="106.68" x2="41.91" y2="106.68" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="P1.4/MCLK/TCK/A4/VREF+"/>
 </segment>
 </net>
 <net name="GND" class="2">
@@ -14120,7 +14120,7 @@ DIN A4, landscape with extra doc field</description>
 <segment>
 <pinref part="C3" gate="G$1" pin="2"/>
 <pinref part="GND6" gate="1" pin="GND"/>
-<wire x1="144.78" y1="43.18" x2="144.78" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="144.78" y1="27.94" x2="144.78" y2="30.48" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="S1" gate="G$1" pin="1"/>
@@ -14163,23 +14163,31 @@ DIN A4, landscape with extra doc field</description>
 <label x="134.62" y="101.6" size="1.27" layer="95" ratio="5" xref="yes"/>
 </segment>
 </net>
-<net name="BLE_WAKE1" class="0">
+<net name="BLE_WAKE" class="0">
 <segment>
 <pinref part="PCB1" gate="G$1" pin="WAKE"/>
 <wire x1="121.92" y1="54.61" x2="127" y2="54.61" width="0.1524" layer="91"/>
 <wire x1="127" y1="59.69" x2="127" y2="54.61" width="0.1524" layer="91"/>
 <pinref part="R1" gate="G$1" pin="2"/>
+<wire x1="127" y1="54.61" x2="135.89" y2="54.61" width="0.1524" layer="91"/>
+<junction x="127" y="54.61"/>
+<label x="135.89" y="54.61" size="1.27" layer="95" ratio="5" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="P1.5/TA0CLK/TMS/A5"/>
+<wire x1="41.91" y1="109.22" x2="30.48" y2="109.22" width="0.1524" layer="91"/>
+<label x="30.48" y="109.22" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="3V" class="0">
 <segment>
 <pinref part="PCB1" gate="G$1" pin="VBAT"/>
 <pinref part="SUPPLY6" gate="P" pin="+4.1V"/>
-<wire x1="121.92" y1="49.53" x2="137.16" y2="49.53" width="0.1524" layer="91"/>
-<wire x1="137.16" y1="49.53" x2="137.16" y2="72.39" width="0.1524" layer="91"/>
-<wire x1="114.3" y1="19.05" x2="137.16" y2="19.05" width="0.1524" layer="91"/>
-<wire x1="137.16" y1="19.05" x2="137.16" y2="49.53" width="0.1524" layer="91"/>
-<junction x="137.16" y="49.53"/>
+<wire x1="121.92" y1="49.53" x2="133.35" y2="49.53" width="0.1524" layer="91"/>
+<wire x1="133.35" y1="49.53" x2="133.35" y2="72.39" width="0.1524" layer="91"/>
+<wire x1="114.3" y1="19.05" x2="133.35" y2="19.05" width="0.1524" layer="91"/>
+<wire x1="133.35" y1="19.05" x2="133.35" y2="49.53" width="0.1524" layer="91"/>
+<junction x="133.35" y="49.53"/>
 <pinref part="PCB1" gate="G$1" pin="VPAD"/>
 <wire x1="114.3" y1="19.05" x2="114.3" y2="21.59" width="0.1524" layer="91"/>
 </segment>
@@ -14211,7 +14219,7 @@ DIN A4, landscape with extra doc field</description>
 <segment>
 <pinref part="C3" gate="G$1" pin="1"/>
 <pinref part="SUPPLY7" gate="P" pin="+4.1V"/>
-<wire x1="144.78" y1="55.88" x2="144.78" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="144.78" y1="40.64" x2="144.78" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="CN1" gate="-1" pin="S"/>
@@ -14351,6 +14359,19 @@ DIN A4, landscape with extra doc field</description>
 <pinref part="R6" gate="G$1" pin="1"/>
 <wire x1="208.28" y1="87.63" x2="212.09" y2="87.63" width="0.254" layer="91"/>
 <pinref part="R7" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="BLE_STATUS" class="0">
+<segment>
+<pinref part="PCB1" gate="G$1" pin="PIO11"/>
+<wire x1="111.76" y1="21.59" x2="111.76" y2="16.51" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="16.51" x2="135.89" y2="16.51" width="0.1524" layer="91"/>
+<label x="135.89" y="16.51" size="1.27" layer="95" ratio="5" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="P1.6/TA0.2/TDI/TCLK/A6"/>
+<wire x1="41.91" y1="111.76" x2="30.48" y2="111.76" width="0.1524" layer="91"/>
+<label x="30.48" y="111.76" size="1.27" layer="95" ratio="5" rot="R180" xref="yes"/>
 </segment>
 </net>
 </nets>
