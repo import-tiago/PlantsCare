@@ -1,10 +1,32 @@
 #include <msp430.h>
 #include <string.h>
+#include <stdio.h>
 
 
+#define HIGH                    1
+#define LOW                     0
+#define TRUE                    1
+#define FALSE                   0
+
+#define MASTER                  1
+#define SLAVE                   0
 
 #define ISR_TIMER0_A0_OFFSET 500
 #define BUFFER_LENGTH 51
+
+#define SHORT_DELAY             100    // 100ms
+#define MEDIUM_DELAY            500    // 500ms
+#define LONG_DELAY              1000   // 1s
+#define NO_BLINKY               0      // Continuous mode
+
+#define SHORT_TIMEOUT           1000   // 1s
+#define MEDIUM_TIMEOUT          5000   // 5s
+#define LONG_TIMEOUT            10000  // 10s
+
+
+#define SHORT_BUTTON_PRESS      1500   // 2s
+#define MEDIUM_BUTTON_PRESS     3500   // 5s
+#define LONG_BUTTON_PRESS       8000  // 10s
 
 
 
@@ -17,7 +39,7 @@ unsigned int Index_UART;
 unsigned int Index_ADC;
 
 unsigned int LED_Period;
-
+unsigned long timebase;
 unsigned int Sensor_Value;
 
 
@@ -27,21 +49,6 @@ unsigned int Sensor_Value;
 #define LED_STATUS_PIN                  BIT3 // P1.3
 #define HIGH_FREQ_SQUAREWAVE_PIN        BIT4 // P1.4
 #define SENSOR_CAPACITIVE_PIN              2 // P1.2
-
-
-/*
-#define BUTTOM_PROG_PIN               BIT0 // P3.0
-#define LED_BLUE_PIN                  BIT2 // P3.2
-#define LED_GREEN_PIN                 BIT3 // P3.3
-#define LED_RED_PIN                   BIT4 // P3.4
-#define MUX_CHANNEL_SELECT_BIT0       BIT2 // P2.2
-#define MUX_CHANNEL_SELECT_BIT1       BIT3 // P2.3
-#define MUX_ENABLE_PIN                BIT6 // P1.6
-#define VBAT_PIN                      3    // P1.3 (0V à 13.3V)
-#define ESP_RESET_PIN                 BIT0 // P6.0
-#define ESP_ON_OFF_PIN                BIT1 // P6.1
-*/
-
 
 void init_TimerA0(void);
 void Write_UART(char* sentence);
@@ -57,6 +64,11 @@ void ADC_Stop(void);
 void ADC_Start(void);
 void delay(unsigned int n);
 
+void LED_Blink(unsigned int _period);
+_Bool Write_Wait_Response(char* _command, char* _expected_answer, unsigned int _timeout);
+void setup_BLE(_Bool HIERARCHY, char* newName) ;
+
+unsigned long millis();
 
 int main(void){
     init_Watchdog();
@@ -68,6 +80,10 @@ int main(void){
     init_Global_Variables();
 
     __bis_SR_register(GIE);
+
+    Write_Wait_Response("AT\r", "OK", SHORT_TIMEOUT);
+
+    setup_BLE(SLAVE, "PlantsCare");
 
     while(1)
     {
@@ -110,11 +126,11 @@ int main(void){
     }
 }
 
-
 void init_Global_Variables(void){
     Buffer_UART[BUFFER_LENGTH-1] = '\0';
     Buffer_ADC[BUFFER_LENGTH-1] = '\0';
 }
+
 void init_Oscillator(void){
     P4SEL0 |= BIT1 | BIT2;                  // set XT1 pin as second function
 
@@ -244,10 +260,6 @@ void ADC_Stop(void){
 }
 
 void ADC_Start(void){
-    /*
-    ADCCTL0  |=  ADCON;
-    ADCIE    |= ADCIE0;
-    */
     ADCCTL0 |= ADCENC | ADCSC;                           // Sampling and conversion start
     while(ADCCTL1 & ADCBUSY);
 }
@@ -290,6 +302,139 @@ char* itoa(int value, char* result, int base) {
     return result;
 }
 
+void setup_BLE(_Bool _HIERARCHY, char* _new_name) {
+
+    __bis_SR_register(GIE);
+
+    char _slave_name[20];
+    char _step = 0;
+
+    //TODO: in PCB version 1.2 or later, changes this lines for BLE_STATUS checking
+    Write_UART("AT+DROP\r"); delay(100);
+    Write_UART("AT+DROP\r"); delay(100);
+    Write_UART("AT+DROP\r"); delay(100);
+    Write_UART("AT+DROP\r"); delay(100);
+
+    sprintf(_slave_name, "%s%s\r", "AT+NAME", _new_name);
+    if(_HIERARCHY == SLAVE){
+        _step = 0;
+        do{
+            switch(_step){
+                case 0:
+                    if(Write_Wait_Response("AT\r", "OK", SHORT_TIMEOUT)) //Test UART connection
+                        _step++;
+                    break;
+
+                case 1:
+                    if(Write_Wait_Response("AT+MODE0\r", "OK", SHORT_TIMEOUT)) //Operation mode set as TRANSMITION only
+                        _step++;
+                    break;
+
+                case 2:
+                    if(Write_Wait_Response("AT+ROLE0\r", "OK", SHORT_TIMEOUT)) //Hierarchical function set as SLAVE
+                        _step++;
+                    break;
+
+                case 3:
+                    if(Write_Wait_Response("AT+RESET\r", "\r", MEDIUM_TIMEOUT)) //Reset BLE module to save all new configurations
+                        _step++;
+                    break;
+
+                case 4:
+                    if(Write_Wait_Response("AT+ADDR?\r", "\r", SHORT_TIMEOUT)) //Request MAC Address
+                        _step++;
+                    break;
+
+                case 5:
+                    if(Write_Wait_Response(_slave_name, "\r", SHORT_TIMEOUT)) // Set a new module name
+                        _step++;
+                    break;
+
+                case 6:
+                    if(Write_Wait_Response("AT+NAME?\r", "\r", MEDIUM_TIMEOUT)) // Checks the new name
+                        _step++;
+                    break;
+            }
+        }while(_step <= 6);
+    }
+    else if(_HIERARCHY == MASTER){
+        _step = 0;
+        do{
+            switch(_step){
+                case 0:
+                    if(Write_Wait_Response("AT\r", "OK", SHORT_TIMEOUT)) //Test UART connection
+                        _step++;
+                    break;
+
+                case 1:
+                    if(Write_Wait_Response("AT+NOTI1\r", "OK", SHORT_TIMEOUT)) //Notify when a connections has beens established
+                        _step++;
+                    break;
+
+                case 2:
+                    if(Write_Wait_Response("AT+MODE0\r", "OK", SHORT_TIMEOUT)) //Operation mode set as TRANSMITION only
+                        _step++;
+                    break;
+
+                case 3:
+                    if(Write_Wait_Response("AT+IMME0\r", "OK", SHORT_TIMEOUT)) //Starts working immediately after power-up
+                        _step++;
+                    break;
+
+                case 4:
+                    if(Write_Wait_Response("AT+ROLE1\r", "OK", SHORT_TIMEOUT)) //Hierarchical function set as MASTER
+                        _step++;
+                    break;
+
+                case 5:
+                    if(Write_Wait_Response("AT+RESET\r", "\r", MEDIUM_TIMEOUT)) //Reset BLE module to save all new configurations
+                        _step++;
+                    break;
+
+                case 6:
+                    if(Write_Wait_Response("AT+ADDR?\r", "\r", SHORT_TIMEOUT)) //Request MAC Address
+                        _step++;
+                    break;
+            }
+        }while(_step <= 6);
+    }
+}
+
+_Bool Write_Wait_Response(char* _command, char* _expected_answer, unsigned int _timeout) {
+
+    _Bool _answer = FALSE;
+    unsigned long _previous_time;
+
+    memset(Buffer_UART, '\0', sizeof(Buffer_UART));
+    Index_UART = 0;
+
+    _previous_time = millis();
+
+    do
+    {
+        Write_UART(_command);
+        delay(_timeout/4);
+        if (strstr((const char*)Buffer_UART, (const char*)_expected_answer) != NULL)
+            _answer = TRUE;
+
+    } while((_answer == FALSE) && ((millis() - _previous_time) < _timeout));
+
+    __no_operation();
+
+    return _answer;
+}
+
+void LED_Blink(unsigned int _period){
+    LED_Period++;
+    if(LED_Period == _period){
+        P1OUT ^= LED_STATUS_PIN;
+        LED_Period = 0;
+    }
+}
+
+unsigned long millis() {
+    return timebase;
+}
 
 #pragma vector = USCI_A0_VECTOR
 __interrupt void USCI_A0_ISR(void) {
@@ -298,17 +443,12 @@ __interrupt void USCI_A0_ISR(void) {
     case USCI_NONE: break;
     case USCI_UART_UCRXIFG:
     {
-
-
         while(!(UCA0IFG&UCTXIFG));
 
         Buffer_UART[Index_UART++] = UCA0RXBUF;
 
-            if (Index_UART == BUFFER_LENGTH-1)
-                Index_UART = 0;
-
-
-
+        if (Index_UART == BUFFER_LENGTH-1)
+            Index_UART = 0;
       break;
     }
     case USCI_UART_UCTXIFG: break;
@@ -319,12 +459,11 @@ __interrupt void USCI_A0_ISR(void) {
 }
 
 #pragma vector = TIMER0_A0_VECTOR
-__interrupt void TIMER0_A0 (void){
-    LED_Period++;
-    if(LED_Period == 1000){
-        P1OUT ^= LED_STATUS_PIN;
-        LED_Period = 0;
-    }
+__interrupt void TIMER0_A0_ISR (void){
+
+    timebase++;
+
+    LED_Blink(LONG_DELAY);
     TA0CCR0 += ISR_TIMER0_A0_OFFSET; // Add Offset to TACCR0
 }
 
