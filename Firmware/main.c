@@ -101,21 +101,21 @@ int main(void){
 
     __bis_SR_register(GIE);
 
-    //setup_BLE(SLAVE, "PlantsCare");
-
+    setup_BLE(SLAVE, "PlantsCare");
+    __no_operation();
 
     while(1)
     {
 
         Soil_Moisture = Get_Soil_Moisture();
         __no_operation();
-/*
+
         itoa(Soil_Moisture, (char*)array, 10);
         Write_UART(array);
-        Write_UART("\r\n");
+        Write_UART("\r");
 
         delay(500);
- */
+
     }
 
 }
@@ -348,7 +348,7 @@ void setup_BLE(_Bool _HIERARCHY, char* _new_name) {
         do{
             switch(_step){
                 case 0:
-                    if(Write_Wait_Response("AT\r", "OK", SHORT_TIMEOUT)) //Test UART connection
+                    if(Write_Wait_Response("AT+RENEW\r", "OK", SHORT_TIMEOUT)) //Test UART connection
                         _step++;
                     break;
 
@@ -389,7 +389,7 @@ void setup_BLE(_Bool _HIERARCHY, char* _new_name) {
         do{
             switch(_step){
                 case 0:
-                    if(Write_Wait_Response("AT\r", "OK", SHORT_TIMEOUT)) //Test UART connection
+                    if(Write_Wait_Response("AT+RENEW\r", "OK", SHORT_TIMEOUT)) //Test UART connection
                         _step++;
                     break;
 
