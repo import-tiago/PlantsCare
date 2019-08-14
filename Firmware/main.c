@@ -10,7 +10,7 @@
 #define MASTER                  1
 #define SLAVE                   0
 
-#define ISR_TIMER0_A0_OFFSET    500
+#define ISR_TIMER0_A0_OFFSET    1045 // 1ms overflow
 #define BUFFER_LENGTH           51
 
 #define SHORT_DELAY             100    // 100ms
@@ -22,16 +22,17 @@
 #define MEDIUM_TIMEOUT          5000   // 5s
 #define LONG_TIMEOUT            10000  // 10s
 
-#define SHORT_BUTTON_PRESS      1500   // 2s
-#define MEDIUM_BUTTON_PRESS     3500   // 5s
-#define LONG_BUTTON_PRESS       8000  // 10s
-
-
+#define SHORT_BUTTON_PRESS      3000   // 3s
+#define MEDIUM_BUTTON_PRESS     5000   // 5s
+#define LONG_BUTTON_PRESS       10000  // 10s
 
 //Capacitive Soil Moisture
 #define N_SAMPLES               50
 #define kL_CALIBRATION          0
 #define kA_CALIBRATION          0.3333
+
+//Button
+#define DEBOUNCE_BUTTON_DELAY   5
 
 /* GLOBAL VARIABLES */
 
@@ -51,19 +52,34 @@ unsigned long Sensor_Value;
 unsigned int Soil_Moisture;
 
 // LED
-unsigned int LED_Period;
+unsigned int LED_Current_Period;
+unsigned int LED_Setpoint_Period;
 
 // Auxiliaries
 unsigned char array[BUFFER_LENGTH];
+
+// Button
+_Bool Current_Button_State;
+_Bool Last_Button_State;
+_Bool Reading_Button;
+unsigned long lastTime;
+unsigned short Button_Pressed_Time;
+_Bool Short_Press_Detected;
+_Bool Medium_Press_Detected;
+_Bool Long_Press_Detected;
 
 
 
 //DEFINIÇÃO DOS PINOS UTILIZADOS PELO uC
 #define UART_TX_PIN                     BIT1 // P1.1
 #define UART_RX_PIN                     BIT0 // P1.0
-#define LED_STATUS_PIN                  BIT3 // P1.3
+
 #define HIGH_FREQ_SQUAREWAVE_PIN        BIT4 // P1.4
 #define SENSOR_CAPACITIVE_PIN              2 // P1.2
+
+#define LED_STATUS_PIN                  BIT3 // P1.3
+#define BUTTON_PIN                      BIT7 // P1.7
+
 
 void init_TimerA0(void);
 void Write_UART(unsigned char* sentence);
@@ -82,7 +98,7 @@ void ADC_Stop(void);
 
 void delay(unsigned int n);
 
-void LED_Blink(unsigned int _period);
+void LED_Blink();
 _Bool Write_Wait_Response(unsigned char* _command, char* _expected_answer, unsigned int _timeout);
 void setup_BLE(_Bool HIERARCHY, char* newName);
 
@@ -101,8 +117,8 @@ int main(void){
 
     __bis_SR_register(GIE);
 
-    setup_BLE(SLAVE, "PlantsCare");
-    __no_operation();
+   // setup_BLE(SLAVE, "PlantsCare");
+   // __no_operation();
 
     while(1)
     {
@@ -110,9 +126,9 @@ int main(void){
         Soil_Moisture = Get_Soil_Moisture();
         __no_operation();
 
-        itoa(Soil_Moisture, (char*)array, 10);
+        sprintf((char*)array, "%d%s", Soil_Moisture, "\n");
+
         Write_UART(array);
-        Write_UART("\r");
 
         delay(500);
 
@@ -145,6 +161,14 @@ unsigned int Get_Soil_Moisture(){
 void init_Global_Variables(void){
     Buffer_UART[BUFFER_LENGTH-1] = '\0';
     Buffer_ADC[BUFFER_LENGTH-1] = '\0';
+
+    Last_Button_State = 1;
+
+    LED_Setpoint_Period = NO_BLINKY;
+
+    Short_Press_Detected = FALSE;
+    Medium_Press_Detected = FALSE;
+    Long_Press_Detected = FALSE;
 }
 
 void init_Oscillator(void){
@@ -213,7 +237,11 @@ void init_GPIO(void) {
     /*  SECOND STEP: INPUT PINS         */
     P1DIR &= ~UART_RX_PIN;
     P1DIR &= ~SENSOR_CAPACITIVE_PIN;
+    P1DIR &= ~BUTTON_PIN;
 
+    /*  PULL-UP OR PULL-DOWN  */
+    P1REN |= BUTTON_PIN; // Pull-up enable to push-button
+    P1OUT |= BUTTON_PIN; // Pull-up enable to push-button
 
     /*  THIRD STEP: SECUNDARY FUNCTIONS  */
     P1SEL0 |= UART_TX_PIN | UART_RX_PIN;    // UART pins
@@ -451,16 +479,98 @@ _Bool Write_Wait_Response(unsigned char* _command, char* _expected_answer, unsig
     return _answer;
 }
 
-void LED_Blink(unsigned int _period){
-    LED_Period++;
-    if(LED_Period == _period){
+void LED_Blink(){
+    LED_Current_Period++;
+
+    if(LED_Current_Period == LED_Setpoint_Period){
         P1OUT ^= LED_STATUS_PIN;
-        LED_Period = 0;
+        LED_Current_Period = 0;
     }
 }
 
 unsigned long millis() {
     return timebase;
+}
+
+void Read_PROG_Button() {
+
+    Reading_Button = (P1IN & BUTTON_PIN);
+
+    if (Reading_Button != Last_Button_State)
+        lastTime = millis();
+
+    if ( ((millis() - lastTime) > DEBOUNCE_BUTTON_DELAY) || Button_Pressed_Time > 0)
+    {
+
+        if ( (Reading_Button != Current_Button_State) || Button_Pressed_Time > 0)
+        {
+            Current_Button_State = Reading_Button;
+
+            if(Current_Button_State == HIGH && Button_Pressed_Time < SHORT_BUTTON_PRESS)
+                Button_Pressed_Time = 0;
+
+            if (Current_Button_State == LOW || Button_Pressed_Time > 0)
+            {
+                Button_Pressed_Time++;
+
+                if( (Button_Pressed_Time >= SHORT_BUTTON_PRESS  &&  Button_Pressed_Time <= MEDIUM_BUTTON_PRESS) || Short_Press_Detected){ //&& Current_Button_State == HIGH){
+
+                    __no_operation();
+                    if(!Short_Press_Detected)
+                        LED_Current_Period = 0;
+                    Short_Press_Detected = TRUE;
+                    Medium_Press_Detected = FALSE;
+                    Long_Press_Detected = FALSE;
+
+                    LED_Setpoint_Period = SHORT_DELAY;
+
+                    if(Current_Button_State == HIGH){
+                        Button_Pressed_Time = 0;
+                        Short_Press_Detected = FALSE;
+                    }
+
+                }
+
+                if( (Button_Pressed_Time >= MEDIUM_BUTTON_PRESS  && Button_Pressed_Time <= LONG_BUTTON_PRESS) || Medium_Press_Detected){ //&& Current_Button_State == HIGH){
+
+                    __no_operation();
+                    if(!Medium_Press_Detected)
+                        LED_Current_Period = 0;
+                    Short_Press_Detected = FALSE;
+                    Medium_Press_Detected = TRUE;
+                    Long_Press_Detected = FALSE;
+
+                    LED_Setpoint_Period = MEDIUM_DELAY;
+
+                    if(Current_Button_State == HIGH){
+                        Button_Pressed_Time = 0;
+                        Medium_Press_Detected = FALSE;
+                    }
+                }
+
+                if( (Button_Pressed_Time >= LONG_BUTTON_PRESS) || Long_Press_Detected){
+
+                    __no_operation();
+                    if(!Long_Press_Detected)
+                        LED_Current_Period = 0;
+                    Short_Press_Detected = FALSE;
+                    Medium_Press_Detected = FALSE;
+                    Long_Press_Detected = TRUE;
+
+                    LED_Setpoint_Period = LONG_DELAY;
+
+                    if(Current_Button_State == HIGH){
+                        Button_Pressed_Time = 0;
+                        Long_Press_Detected = FALSE;
+                    }
+                }
+            }
+        }
+    }
+    else
+        Current_Button_State = HIGH;
+
+    Last_Button_State = Reading_Button;
 }
 
 #pragma vector = USCI_A0_VECTOR
@@ -490,7 +600,8 @@ __interrupt void TIMER0_A0_ISR (void){
 
     timebase++;
 
-    LED_Blink(LONG_DELAY);
+    Read_PROG_Button();
+    LED_Blink();
     TA0CCR0 += ISR_TIMER0_A0_OFFSET; // Add Offset to TACCR0
 }
 
