@@ -21,7 +21,7 @@ unsigned int LED_Period;
 unsigned int Sensor_Value;
 
 
-//DEFINI«√O DOS PINOS UTILIZADOS PELO uC
+//DEFINI√á√ÉO DOS PINOS UTILIZADOS PELO uC
 #define UART_TX_PIN                     BIT1 // P1.1
 #define UART_RX_PIN                     BIT0 // P1.0
 #define LED_STATUS_PIN                  BIT3 // P1.3
@@ -37,7 +37,7 @@ unsigned int Sensor_Value;
 #define MUX_CHANNEL_SELECT_BIT0       BIT2 // P2.2
 #define MUX_CHANNEL_SELECT_BIT1       BIT3 // P2.3
 #define MUX_ENABLE_PIN                BIT6 // P1.6
-#define VBAT_PIN                      3    // P1.3 (0V ‡ 13.3V)
+#define VBAT_PIN                      3    // P1.3 (0V √† 13.3V)
 #define ESP_RESET_PIN                 BIT0 // P6.0
 #define ESP_ON_OFF_PIN                BIT1 // P6.1
 */
