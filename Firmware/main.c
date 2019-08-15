@@ -29,18 +29,20 @@
 
 //Capacitive Soil Moisture
 #define N_SAMPLES               50
-#define kL_CALIBRATION          0
-#define kA_CALIBRATION          0.3333
+#define SENSOR_FULL_DRY         0
+#define SENSOR_FULL_WET         1
+#define SENSOR_CALIBRATION      2
+
 
 //Button
 #define DEBOUNCE_BUTTON_DELAY   5
 
 //FRAM
-#define FRAM_kL_CALIBRATION_ADDR   0x1800      // 6B -> 4b x 6B = 18b -> 0x1818
-#define FRAM_kL_CALIBRATION_LEN    6
+#define FRAM_kL_CALIBRATION_ADDR   0x1800      // 7B -> 4b * 7 = 18b -> 0x181C
+#define FRAM_kL_CALIBRATION_LEN    7
 
-#define FRAM_kA_CALIBRATION_ADDR   0x1818      // 6B -> 4b x 6B = 18b -> 0x1830
-#define FRAM_kA_CALIBRATION_LEN    6
+#define FRAM_kA_CALIBRATION_ADDR   0x1824      // 7B -> 4b * 7 = 18b -> 0x1838
+#define FRAM_kA_CALIBRATION_LEN    7
 
 
 
@@ -74,11 +76,17 @@ unsigned long timebase;
 volatile unsigned char Buffer_ADC[BUFFER_LENGTH];
 unsigned int Index_ADC;
 
-//Capacitive Soil Moisture
-unsigned long Sensor_Value;
+//Soil Moisture
+unsigned int Sensor_Value;
+unsigned int Sensor_Dry_Value;
+unsigned int Sensor_Wet_Value;
 unsigned int Soil_Moisture;
+
+
+//Capacitive Sensor
 float kA_Calibration;
 float kL_Calibration;
+_Bool Calibration_Mode_Running;
 
 
 // LED
@@ -128,15 +136,20 @@ void ADC_Stop(void);
 
 void delay(unsigned int n);
 void LED_Blink();
+void LED_Blink_Successful(char _nBlink);
 _Bool Write_Wait_Response(unsigned char* _command, char* _expected_answer, unsigned int _timeout);
 void setup_BLE(_Bool HIERARCHY, char* newName);
 unsigned int Get_Soil_Moisture();
+unsigned int Get_Sensor_Value();
 unsigned long millis();
-_Bool FRAM_Write(unsigned long *Write_Address, char* Write_Data);
+_Bool FRAM_Write(unsigned long *Write_Address, char* Write_Data, unsigned short Number_Bytes);
 void FRAM_Read(unsigned long *Read_Address,  unsigned short Number_Bytes);
 void ftoa(volatile float f, char * buf);
 void Load_Calibration_Coefficients();
 void Clear_Calibration_Coefficients();
+void Save_Calibration_Coefficients(float kA, float kL);
+
+void Two_Points_Sensor_Calibration(volatile  int _Dry_Value, volatile  int _Wet_Value);
 
 
 int main(void){
@@ -150,41 +163,120 @@ int main(void){
 
     __bis_SR_register(GIE);
 
-    Clear_Calibration_Coefficients();
-    Load_Calibration_Coefficients();
 
-    __no_operation();
-
-   // setup_BLE(SLAVE, "PlantsCare");
-   // __no_operation();
+    Two_Points_Sensor_Calibration(185, 145);
+    kA_Calibration = 0;
+    kL_Calibration = 0;
 
     while(1)
     {
-
-        Soil_Moisture = Get_Soil_Moisture();
-        __no_operation();
-
-        sprintf((char*)array, "%d%s", Soil_Moisture, "\n");
-
-        Write_UART(array);
-
-        delay(500);
-
+        runFSM();
     }
-
 }
+
+
 
 void runFSM() {
     switch(stateFSM1)
     {
        case STARTING:
        {
+           LED_Setpoint_Period = NO_BLINKY;
            Load_Calibration_Coefficients();
+           stateFSM1 = GET_SOIL_MOISTURE;
+           break;
        }
+
+       case GET_SOIL_MOISTURE:
+       {
+
+           Soil_Moisture = Get_Soil_Moisture();
+
+           sprintf((char*)array, "%d%s", Sensor_Value, "\n");
+           Write_UART(array);
+           Write_UART("\n");
+
+           sprintf((char*)array, "%d%s", Soil_Moisture, "\n");
+           Write_UART(array);
+           Write_UART("\n");
+
+           delay(100);
+
+           break;
+       }
+
+       case BROKER_CONNECT:
+       {
+           sprintf((char*)array, "%d%s", Soil_Moisture, "\n");
+           Write_UART(array);
+           delay(500);
+           break;
+       }
+
+       case CAPACITIVE_SENSOR_CALIBRATION:
+       {
+           char _step = 0;
+           do
+           {
+               switch(_step)
+               {
+                   case SENSOR_FULL_DRY:
+                   {
+                       do
+                       {
+                           Sensor_Dry_Value = Get_Sensor_Value();
+                       }while((P1IN & BUTTON_PIN));
+
+                       LED_Blink_Successful(10);
+                       _step++;
+
+                       break;
+                   }
+
+                   case SENSOR_FULL_WET:
+                   {
+                       do
+                       {
+                           Sensor_Wet_Value = Get_Sensor_Value();
+                       }while((P1IN & BUTTON_PIN));
+
+                       LED_Blink_Successful(10);
+                       _step++;
+
+                       break;
+                   }
+                   case SENSOR_CALIBRATION:
+                   {
+                       kA_Calibration = (100.0 / (Sensor_Wet_Value - Sensor_Dry_Value));
+                       kL_Calibration = (kA_Calibration * Sensor_Dry_Value);
+
+                       Save_Calibration_Coefficients(kA_Calibration, kL_Calibration);
+                       LED_Blink_Successful(10);
+
+                       Calibration_Mode_Running = FALSE;
+                       break;
+                   }
+               }
+           }while(Calibration_Mode_Running);
+
+           stateFSM1 = STARTING;
+           break;
+       }
+
     }
 }
 
-void Load_Calibration_Coefficients(){
+void Two_Points_Sensor_Calibration(volatile  int _Dry_Value, volatile  int _Wet_Value) {
+
+    Clear_Calibration_Coefficients();
+
+    kA_Calibration = (100.0 / (float)(_Wet_Value - _Dry_Value));
+    kL_Calibration = (kA_Calibration * _Dry_Value);
+
+    Save_Calibration_Coefficients(kA_Calibration, kL_Calibration);
+}
+
+void Load_Calibration_Coefficients() {
 
     FRAM_Read(FRAM_kA_CALIBRATION_ADDR, FRAM_kA_CALIBRATION_LEN);
     kA_Calibration = atof(array);
@@ -197,12 +289,26 @@ void Load_Calibration_Coefficients(){
 
 void Clear_Calibration_Coefficients(){
 
-    ftoa(0.0000, array);
-    FRAM_Write(FRAM_kA_CALIBRATION_ADDR, array);
+    memset(array, '\0', sizeof(array));
+    ftoa(0.00000, array);
+    FRAM_Write(FRAM_kA_CALIBRATION_ADDR, array, FRAM_kA_CALIBRATION_LEN);
 
-    ftoa(0.0000, array);
-    FRAM_Write(FRAM_kL_CALIBRATION_ADDR, array);
+    memset(array, '\0', sizeof(array));
+    ftoa(0.00000, array);
+    FRAM_Write(FRAM_kL_CALIBRATION_ADDR, array, FRAM_kL_CALIBRATION_LEN);
 
+    __no_operation();
+}
+
+void Save_Calibration_Coefficients(float kA, float kL){
+    memset(array, '\0', sizeof(array));
+    ftoa(kA, array);
+    FRAM_Write(FRAM_kA_CALIBRATION_ADDR, array, FRAM_kA_CALIBRATION_LEN);
+    __no_operation();
+
+    memset(array, '\0', sizeof(array));
+    ftoa(kL, array);
+    FRAM_Write(FRAM_kL_CALIBRATION_ADDR, array, FRAM_kL_CALIBRATION_LEN);
     __no_operation();
 }
 
@@ -217,43 +323,45 @@ void ftoa(volatile float f, char * buf) {
     f *= 10000;
     decPart = f;
 
-    if(decPart > 0)
-        sprintf(buf, "%d.%d", intPart, decPart);
-    else
+    if(decPart < 0)
+        decPart  *= -1;
+
+    if(decPart == 0)
         sprintf(buf, "%d.0000", intPart);
+    else
+        sprintf(buf, "%d.%d", intPart, decPart);
 
     __no_operation();
 }
 
 void FRAM_Read(unsigned long *Read_Address,  unsigned short Number_Bytes) {
 
-      unsigned short i;
-      memset(array, '\0', sizeof(array));
+    unsigned short i;
+    memset(array, '\0', sizeof(array));
 
-      for(i = 0; i < Number_Bytes; i++)
-      {
-          array[i] = *Read_Address++;
-      }
-
-      return FRAM_SUCCESS;
+    for(i = 0; i < Number_Bytes; i++)
+    {
+      array[i] = *Read_Address++;
+    }
+    return FRAM_SUCCESS;
 }
 
-_Bool FRAM_Write(unsigned long *Write_Address, char* Write_Data) {
+_Bool FRAM_Write(unsigned long *Write_Address, char* Write_Data, unsigned short Number_Bytes) {
 
-      unsigned short i;
-      volatile unsigned short Number_Bytes = strlen(Write_Data);
+    unsigned short i;
 
-      __no_operation();
 
-      SYSCFG0 &= ~DFWP; // Write Protection Disable
+    __no_operation();
 
-      for(i = 0; i < Number_Bytes; i++)
-      {
-          *Write_Address++ = Write_Data[i];
-      }
+    SYSCFG0 &= ~DFWP; // Write Protection Disable
 
-      SYSCFG0 |= DFWP; // Write Protection Enable
-      return FRAM_SUCCESS;
+    for(i = 0; i < Number_Bytes; i++)
+    {
+      *Write_Address++ = Write_Data[i];
+    }
+
+    SYSCFG0 |= DFWP; // Write Protection Enable
+    return FRAM_SUCCESS;
 }
 
 unsigned int Get_Soil_Moisture(){
@@ -261,13 +369,13 @@ unsigned int Get_Soil_Moisture(){
     int _soil_moisture;
 
     for(i = 0; i < N_SAMPLES; i++)
-    {
         Sensor_Value += ADC_Read();
-    }
+
 
     Sensor_Value /= N_SAMPLES;
 
-    _soil_moisture = (Sensor_Value * kA_CALIBRATION) + kL_CALIBRATION;
+    _soil_moisture = (Sensor_Value * kA_Calibration) - kL_Calibration;
+    __no_operation();
 
     if(_soil_moisture < 0)
         _soil_moisture = 0;
@@ -275,7 +383,17 @@ unsigned int Get_Soil_Moisture(){
         _soil_moisture = 100;
 
     return _soil_moisture;
+}
 
+unsigned int Get_Sensor_Value(){
+    char i;
+
+    Sensor_Value = 0;
+
+    for(i = 0; i < N_SAMPLES; i++)
+        Sensor_Value += ADC_Read();
+
+    return Sensor_Value /= N_SAMPLES;
 }
 
 void init_Global_Variables(void){
@@ -289,6 +407,8 @@ void init_Global_Variables(void){
     Short_Press_Detected = FALSE;
     Medium_Press_Detected = FALSE;
     Long_Press_Detected = FALSE;
+
+    Calibration_Mode_Running = FALSE;
 
     stateFSM1 = STARTING;
 }
@@ -445,7 +565,7 @@ void init_ADC(void){
     ADCCTL0  &= ~ADCENC;            // Disable ADC conversion (needed for the next steps)
     ADCCTL0  |= ADCSHT_12 | ADCON;  // ADC sample-and-hold time = 1024 ADCCLK cycles | ADC on
     ADCCTL1  |= ADCSHP;            // ADC sample-and-hold pulse-mode select = SAMPCON signal is sourced from the sampling timer
-    ADCCTL2  |= ADCRES;             // 10-bit conversion results
+    ADCCTL2  |= ADCRES_1;             // 10-bit conversion results
     ADCMCTL0 |= ADCINCH_2;          // A2 ADC input select; Vref=AVCC
     ADCIE    |= ADCIE0;             // Enable ADC conv complete interrupt
 }
@@ -610,6 +730,18 @@ void LED_Blink(){
     }
 }
 
+void LED_Blink_Successful(char _nBlink) {
+    char i;
+
+    for(i = 0; i < _nBlink; i++)
+    {
+        P1OUT ^= LED_STATUS_PIN;
+        delay(250);
+    }
+}
+
+
+
 unsigned long millis() {
     return timebase;
 }
@@ -640,17 +772,20 @@ void Read_PROG_Button() {
                     __no_operation();
                     if(!Short_Press_Detected)
                         LED_Current_Period = 0;
+
                     Short_Press_Detected = TRUE;
                     Medium_Press_Detected = FALSE;
                     Long_Press_Detected = FALSE;
 
-                    LED_Setpoint_Period = SHORT_DELAY;
+                    LED_Setpoint_Period = MEDIUM_DELAY;
 
                     if(Current_Button_State == HIGH){
                         Button_Pressed_Time = 0;
                         Short_Press_Detected = FALSE;
-                    }
 
+                        Calibration_Mode_Running = TRUE;
+                        stateFSM1 = CAPACITIVE_SENSOR_CALIBRATION;
+                    }
                 }
 
                 if( (Button_Pressed_Time >= MEDIUM_BUTTON_PRESS  && Button_Pressed_Time <= LONG_BUTTON_PRESS) || Medium_Press_Detected){ //&& Current_Button_State == HIGH){
@@ -658,6 +793,7 @@ void Read_PROG_Button() {
                     __no_operation();
                     if(!Medium_Press_Detected)
                         LED_Current_Period = 0;
+
                     Short_Press_Detected = FALSE;
                     Medium_Press_Detected = TRUE;
                     Long_Press_Detected = FALSE;
@@ -675,14 +811,17 @@ void Read_PROG_Button() {
                     __no_operation();
                     if(!Long_Press_Detected)
                         LED_Current_Period = 0;
+
                     Short_Press_Detected = FALSE;
                     Medium_Press_Detected = FALSE;
                     Long_Press_Detected = TRUE;
 
-                    LED_Setpoint_Period = LONG_DELAY;
+                    LED_Setpoint_Period = SHORT_DELAY;
 
                     if(Current_Button_State == HIGH){
                         Button_Pressed_Time = 0;
+                        Clear_Calibration_Coefficients();
+                        setup_BLE(SLAVE, "PlantsCare");
                         Long_Press_Detected = FALSE;
                     }
                 }
