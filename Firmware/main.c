@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define HIGH                    1
 #define LOW                     0
@@ -34,6 +35,32 @@
 //Button
 #define DEBOUNCE_BUTTON_DELAY   5
 
+//FRAM
+#define FRAM_kL_CALIBRATION_ADDR   0x1800      // 6B -> 4b x 6B = 18b -> 0x1818
+#define FRAM_kL_CALIBRATION_LEN    6
+
+#define FRAM_kA_CALIBRATION_ADDR   0x1818      // 6B -> 4b x 6B = 18b -> 0x1830
+#define FRAM_kA_CALIBRATION_LEN    6
+
+
+
+
+#define FRAM_ERROR 0
+#define FRAM_SUCCESS 1
+
+
+//DEFINIO DOS ESTADOS DA MQUINA DE ESTADOS FINITA
+typedef enum {
+    STARTING = 0,
+    GET_SOIL_MOISTURE,
+    BROKER_CONNECT,
+    CAPACITIVE_SENSOR_CALIBRATION,
+} StatesFSM1;
+
+StatesFSM1 stateFSM1;
+
+
+
 /* GLOBAL VARIABLES */
 
 // UART Peripheral
@@ -50,13 +77,16 @@ unsigned int Index_ADC;
 //Capacitive Soil Moisture
 unsigned long Sensor_Value;
 unsigned int Soil_Moisture;
+float kA_Calibration;
+float kL_Calibration;
+
 
 // LED
 unsigned int LED_Current_Period;
 unsigned int LED_Setpoint_Period;
 
 // Auxiliaries
-unsigned char array[BUFFER_LENGTH];
+volatile unsigned char array[BUFFER_LENGTH];
 
 // Button
 _Bool Current_Button_State;
@@ -97,14 +127,17 @@ void ADC_Start(void);
 void ADC_Stop(void);
 
 void delay(unsigned int n);
-
 void LED_Blink();
 _Bool Write_Wait_Response(unsigned char* _command, char* _expected_answer, unsigned int _timeout);
 void setup_BLE(_Bool HIERARCHY, char* newName);
-
 unsigned int Get_Soil_Moisture();
-
 unsigned long millis();
+_Bool FRAM_Write(unsigned long *Write_Address, char* Write_Data);
+void FRAM_Read(unsigned long *Read_Address,  unsigned short Number_Bytes);
+void ftoa(volatile float f, char * buf);
+void Load_Calibration_Coefficients();
+void Clear_Calibration_Coefficients();
+
 
 int main(void){
     init_Watchdog();
@@ -116,6 +149,11 @@ int main(void){
     init_Global_Variables();
 
     __bis_SR_register(GIE);
+
+    Clear_Calibration_Coefficients();
+    Load_Calibration_Coefficients();
+
+    __no_operation();
 
    // setup_BLE(SLAVE, "PlantsCare");
    // __no_operation();
@@ -134,6 +172,88 @@ int main(void){
 
     }
 
+}
+
+void runFSM() {
+    switch(stateFSM1)
+    {
+       case STARTING:
+       {
+           Load_Calibration_Coefficients();
+       }
+    }
+}
+
+void Load_Calibration_Coefficients(){
+
+    FRAM_Read(FRAM_kA_CALIBRATION_ADDR, FRAM_kA_CALIBRATION_LEN);
+    kA_Calibration = atof(array);
+
+    FRAM_Read(FRAM_kL_CALIBRATION_ADDR, FRAM_kL_CALIBRATION_LEN);
+    kL_Calibration = atof(array);
+
+    __no_operation();
+}
+
+void Clear_Calibration_Coefficients(){
+
+    ftoa(0.0000, array);
+    FRAM_Write(FRAM_kA_CALIBRATION_ADDR, array);
+
+    ftoa(0.0000, array);
+    FRAM_Write(FRAM_kL_CALIBRATION_ADDR, array);
+
+    __no_operation();
+}
+
+
+void ftoa(volatile float f, char * buf) {
+
+    volatile int intPart = 0;
+    volatile int decPart = 0;
+
+    intPart = f;
+    f -= intPart;
+    f *= 10000;
+    decPart = f;
+
+    if(decPart > 0)
+        sprintf(buf, "%d.%d", intPart, decPart);
+    else
+        sprintf(buf, "%d.0000", intPart);
+
+    __no_operation();
+}
+
+void FRAM_Read(unsigned long *Read_Address,  unsigned short Number_Bytes) {
+
+      unsigned short i;
+      memset(array, '\0', sizeof(array));
+
+      for(i = 0; i < Number_Bytes; i++)
+      {
+          array[i] = *Read_Address++;
+      }
+
+      return FRAM_SUCCESS;
+}
+
+_Bool FRAM_Write(unsigned long *Write_Address, char* Write_Data) {
+
+      unsigned short i;
+      volatile unsigned short Number_Bytes = strlen(Write_Data);
+
+      __no_operation();
+
+      SYSCFG0 &= ~DFWP; // Write Protection Disable
+
+      for(i = 0; i < Number_Bytes; i++)
+      {
+          *Write_Address++ = Write_Data[i];
+      }
+
+      SYSCFG0 |= DFWP; // Write Protection Enable
+      return FRAM_SUCCESS;
 }
 
 unsigned int Get_Soil_Moisture(){
@@ -169,6 +289,8 @@ void init_Global_Variables(void){
     Short_Press_Detected = FALSE;
     Medium_Press_Detected = FALSE;
     Long_Press_Detected = FALSE;
+
+    stateFSM1 = STARTING;
 }
 
 void init_Oscillator(void){
