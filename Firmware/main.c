@@ -87,6 +87,7 @@ unsigned int Soil_Moisture;
 float kA_Calibration;
 float kL_Calibration;
 _Bool Calibration_Mode_Running;
+_Bool Successful_LED_Notification;
 
 
 // LED
@@ -148,8 +149,9 @@ void ftoa(volatile float f, char * buf);
 void Load_Calibration_Coefficients();
 void Clear_Calibration_Coefficients();
 void Save_Calibration_Coefficients(float kA, float kL);
-
+void LED_State(char _state);
 void Two_Points_Sensor_Calibration(volatile  int _Dry_Value, volatile  int _Wet_Value);
+void Load_Default_Calibration_Coefficients();
 
 
 int main(void){
@@ -164,9 +166,9 @@ int main(void){
     __bis_SR_register(GIE);
 
 
-    Two_Points_Sensor_Calibration(185, 145);
-    kA_Calibration = 0;
-    kL_Calibration = 0;
+    Load_Default_Calibration_Coefficients();
+
+
 
     while(1)
     {
@@ -174,7 +176,11 @@ int main(void){
     }
 }
 
-
+void Load_Default_Calibration_Coefficients(){
+    Two_Points_Sensor_Calibration(182, 149);
+    kA_Calibration = 0;
+    kL_Calibration = 0;
+}
 
 void runFSM() {
     switch(stateFSM1)
@@ -192,15 +198,16 @@ void runFSM() {
 
            Soil_Moisture = Get_Soil_Moisture();
 
-           sprintf((char*)array, "%d%s", Sensor_Value, "\n");
+           sprintf((char*)array, "%d%s", Sensor_Value, "\r\n");
            Write_UART(array);
-           Write_UART("\n");
 
-           sprintf((char*)array, "%d%s", Soil_Moisture, "\n");
+
+           sprintf((char*)array, "%d%s", Soil_Moisture, "\r\n");
            Write_UART(array);
-           Write_UART("\n");
 
-           delay(100);
+           Write_UART("\r\r\n");
+
+           delay(500);
 
            break;
        }
@@ -252,7 +259,7 @@ void runFSM() {
 
                        Save_Calibration_Coefficients(kA_Calibration, kL_Calibration);
                        LED_Blink_Successful(10);
-
+                       LED_State(LOW);
                        Calibration_Mode_Running = FALSE;
                        break;
                    }
@@ -409,6 +416,7 @@ void init_Global_Variables(void){
     Long_Press_Detected = FALSE;
 
     Calibration_Mode_Running = FALSE;
+    Successful_LED_Notification = FALSE;
 
     stateFSM1 = STARTING;
 }
@@ -722,15 +730,28 @@ _Bool Write_Wait_Response(unsigned char* _command, char* _expected_answer, unsig
 }
 
 void LED_Blink(){
-    LED_Current_Period++;
+    if(!Successful_LED_Notification)
+    {
+        LED_Current_Period++;
 
-    if(LED_Current_Period == LED_Setpoint_Period){
-        P1OUT ^= LED_STATUS_PIN;
-        LED_Current_Period = 0;
+        if(LED_Current_Period == LED_Setpoint_Period){
+            P1OUT ^= LED_STATUS_PIN;
+            LED_Current_Period = 0;
+        }
     }
 }
 
+void LED_State(char _state){
+    if(_state == LOW)
+        P1OUT &= ~LED_STATUS_PIN;
+    else if(_state == TRUE)
+        P1OUT |= LED_STATUS_PIN;
+}
+
+
 void LED_Blink_Successful(char _nBlink) {
+    Successful_LED_Notification = TRUE;
+
     char i;
 
     for(i = 0; i < _nBlink; i++)
@@ -738,6 +759,9 @@ void LED_Blink_Successful(char _nBlink) {
         P1OUT ^= LED_STATUS_PIN;
         delay(250);
     }
+
+    Successful_LED_Notification = FALSE;
+
 }
 
 
