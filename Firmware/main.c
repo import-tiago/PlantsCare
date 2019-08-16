@@ -143,7 +143,7 @@ void setup_BLE(_Bool HIERARCHY, char* newName);
 unsigned int Get_Soil_Moisture();
 unsigned int Get_Sensor_Value();
 unsigned long millis();
-_Bool FRAM_Write(unsigned long *Write_Address, char* Write_Data, unsigned short Number_Bytes);
+void FRAM_Write(unsigned long *Write_Address, char* Write_Data, unsigned short Number_Bytes);
 void FRAM_Read(unsigned long *Read_Address,  unsigned short Number_Bytes);
 void ftoa(volatile float f, char * buf);
 void Load_Calibration_Coefficients();
@@ -350,10 +350,9 @@ void FRAM_Read(unsigned long *Read_Address,  unsigned short Number_Bytes) {
     {
       array[i] = *Read_Address++;
     }
-    return FRAM_SUCCESS;
 }
 
-_Bool FRAM_Write(unsigned long *Write_Address, char* Write_Data, unsigned short Number_Bytes) {
+void FRAM_Write(unsigned long *Write_Address, char* Write_Data, unsigned short Number_Bytes) {
 
     unsigned short i;
 
@@ -368,7 +367,6 @@ _Bool FRAM_Write(unsigned long *Write_Address, char* Write_Data, unsigned short 
     }
 
     SYSCFG0 |= DFWP; // Write Protection Enable
-    return FRAM_SUCCESS;
 }
 
 unsigned int Get_Soil_Moisture(){
