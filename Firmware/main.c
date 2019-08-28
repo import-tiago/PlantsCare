@@ -183,18 +183,15 @@ void Load_Default_Calibration_Coefficients(){
 }
 
 void runFSM() {
-    switch(stateFSM1)
-    {
-       case STARTING:
-       {
+    switch(stateFSM1) {
+       case STARTING: {
            LED_Setpoint_Period = NO_BLINKY;
            Load_Calibration_Coefficients();
            stateFSM1 = GET_SOIL_MOISTURE;
            break;
        }
 
-       case GET_SOIL_MOISTURE:
-       {
+       case GET_SOIL_MOISTURE: {
 
            Soil_Moisture = Get_Soil_Moisture();
 
@@ -212,16 +209,14 @@ void runFSM() {
            break;
        }
 
-       case BROKER_CONNECT:
-       {
+       case BROKER_CONNECT: {
            sprintf((char*)array, "%d%s", Soil_Moisture, "\n");
            Write_UART(array);
            delay(500);
            break;
        }
 
-       case CAPACITIVE_SENSOR_CALIBRATION:
-       {
+       case CAPACITIVE_SENSOR_CALIBRATION: {
            char _step = 0;
            do
            {
@@ -318,7 +313,6 @@ void Save_Calibration_Coefficients(float kA, float kL){
     FRAM_Write(FRAM_kL_CALIBRATION_ADDR, array, FRAM_kL_CALIBRATION_LEN);
     __no_operation();
 }
-
 
 void ftoa(volatile float f, char * buf) {
 
@@ -746,7 +740,6 @@ void LED_State(char _state){
         P1OUT |= LED_STATUS_PIN;
 }
 
-
 void LED_Blink_Successful(char _nBlink) {
     Successful_LED_Notification = TRUE;
 
@@ -761,8 +754,6 @@ void LED_Blink_Successful(char _nBlink) {
     Successful_LED_Notification = FALSE;
 
 }
-
-
 
 unsigned long millis() {
     return timebase;

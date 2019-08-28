@@ -8194,7 +8194,7 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="R" x="68.75" y="184.75" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="21.125" y="152.365" size="1.27" layer="27" rot="R90" display="off"/>
 </element>
-<element name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k" x="13.97" y="146.75" smashed="yes" rot="R90">
+<element name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="100k" x="13.97" y="146.75" smashed="yes" rot="R90">
 <attribute name="NAME" x="13.335" y="146.115" size="1.27" layer="25" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="63.5" y="183.58" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="15.790340625" y="147.300215625" size="1.27" layer="27" rot="R90" display="off"/>
