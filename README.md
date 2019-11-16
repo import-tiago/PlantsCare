@@ -15,10 +15,10 @@ PlantsCare is an IoT device for ultra low power standalone capacitive soil moist
 ##### Firmware Project / [Code Composer Studio (CCS)](http://www.ti.com/tool/CCSTUDIO)
 
 ## PCB Gerber Preview
-![enter image description here](https://lh3.googleusercontent.com/LOmEP2mD7XflodYFwUT_aUZFbs0wenZHi7PlDKWfz_rnjyP-PZkNOjf1A05D3ZemAHy8RlI7vVou8g=s500 "PCB Preview")
+<img src="https://github.com/TiagoPaulaSilva/PlantsCare/blob/master/Others/PlantsCare%20Gerber%20Preview.png" width="10%" height="10%">
 
 ## Schematic
-![enter image description here](https://lh3.googleusercontent.com/1ZQKRzwa2hFnqeqokR_LkQ7vzScxtDUsg2nehuYQR-wh68JxA0ujl9_8lwJQN6f9XFhd2lLZCFsIBQ=s2000)
+<img src="https://github.com/TiagoPaulaSilva/PlantsCare/blob/master/Others/PlantsCare%20Schematic%20Preview.png" width="100%" height="100%">
 
 ## Bill of Materials
 | Qty | Parts | Description | Value | Package |
