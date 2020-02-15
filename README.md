@@ -1,5 +1,5 @@
 # PlantsCare
-![Status](https://img.shields.io/badge/Status-UnderDev-red.svg) [![Donate](https://img.shields.io/badge/Donate-Buy%20Me%20a%20Coffee-yellow.svg)](https://www.buymeacoffee.com/TiagoPaulaSilva)
+[![Status](https://img.shields.io/badge/status-WIP-red)](https://github.com/TiagoPaulaSilva/PlantsCare) [![Donate](https://img.shields.io/badge/Donate-Buy%20Me%20a%20Coffee-yellow.svg)](https://www.buymeacoffee.com/TiagoPaulaSilva)
 
 PlantsCare is an IoT device for ultra low power standalone capacitive soil moisture meter.
 
